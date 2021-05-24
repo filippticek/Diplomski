@@ -74,7 +74,6 @@
 \RequirePackage{graphicx} % Uključeno jer je često korišteno
 \RequirePackage{amssymb} % Uključeno jer je često korišteno
 \RequirePackage{amsmath} % Uključeno jer je često korišteno
-\RequirePackage{fixltx2e}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage{url} % Potrebno radi natbiba
@@ -92,9 +91,7 @@
 \if@fontlmodern\RequirePackage{lmodern} \fi
 
 % Postavljanje stila citiranja
-\if@citeauthoryear \RequirePackage[authoryear, round]{natbib}
-\else \RequirePackage[numbers, square]{natbib}
-\fi
+\RequirePackage[numbers, square]{natbib}
 
 % Umjesto poziva \RequirePackage[outsidefoot]{pageno}.
 % Neke LaTeX distribucije odbijaju automatski instalirati pageno paket.
@@ -174,6 +171,7 @@
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+   \setcounter{tocdepth}{3}
    \@starttoc{toc}%
 }
 
