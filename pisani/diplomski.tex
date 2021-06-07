@@ -27,7 +27,7 @@
 \tableofcontents
 
 \chapter{Uvod}
-Uvod u rad
+Cola aparat\citep{Coke}
 
 \chapter{Internet stvari}
 
@@ -42,7 +42,7 @@ Uvod u rad
 
 ITU-T također definira pojmove uređaja i stvari u kontekstu Interneta stvari. Uređaj je dio opreme s obaveznom mogučnošću komunikacije i neobaveznim mogućnostima opažanja, aktuacije te prikupljanja, pohrane i obrade podataka. Pojam stvari je definiran kao objekt u fizičkom svijetu (fizička stvar) ili u informacijskom svijetu (virtualna stvar) koja ima sposobnost da bude identificiran i integriran u komunikacijsku mrežu. Fizičke stvari postoje u fizičkom svijetu i imaju sposobnosti biti opažene, aktuirane i povezane, a virtualne stvari potoje u informacijskom svijetu i imaju sposobnosti biti spremljene, obrađene i pristupljene. Neki od primjera fizičkih stvari su: okolina, industrijski roboti, dobra i električna oprema, dok primjeri virtualnih stvari su multimedijski sadržaji i programska podrška.
 
-\section{Referentni model Internet stvari}
+\section{Referentni model}
 Ako promatramo Internet stvari kao jedan zaseban ekosustav potrebno je definirati referentni model prema kojem možemo opisati sve dijelove sustava i njegove zahtijeve. S obzirom na to da je Internet stvari pojam koji opisuje povezanost stvari, a ne i konkretan referentni model, od pojave samog pojma su se predlagali različiti modeli koji bi predstavljali cijeli spektar mogućnosti i zahtijeva Interneta stvari. 
 \begin{figure}[htb]
     \centering
@@ -60,7 +60,7 @@ su različitih veličina, izgleda i namjene te potječu od različitih proizvođ
 \subsection{Povezanost}
 Komunikacije i povezanost su sarđani u drugom sloju. Najvažnija mogućnost ovog sloja je sposobnost pouzdane i pravovremenog prijenosa informacija. Time se definira prijenos između uređaja i mreže, između mreža te između mreže i računanja na rubu mreže na trećem sloju. Jedan od cilja referentnog modela je da se sva komunikacija odvija putem postojećih mreža. Kako neki uređaji ne podržavaju IP protokol, potrebno je u mrežu uvesti prilaze \engl{gateway} koji će služiti kao posrednik između uređaja i ostatka mreže. Na ovom sloju se pojavljuje velika heterogenost komunikacijskih i pristupnih protokola koji uvelike ovise o željenoj namjeni uređaja prvog sloja. Ovaj sloj je usko povezan sa OSI modelom te sadrži protokole fizičkog, podatkovnog, mrežnog, transportnog, prezentacijskog, aplikacijskog i sloja sesije.
 
-\subsection{Računanje na rubu mreže}
+\subsection{Računarstvo na rubu mreže}
 Funckija trećeg sloja je vođena potrebom za pretvaranjem mrežnog podatkovnog prometa u informacije koje su prikladne za pohranu podataka i za obradu na višim slojevima. Treći sloj je zadužen za obradu podataka i njihovu transformaciju. Jedno od načela ovog referentnog sloja je da se obrada podataka odvija što je ranije moguće i što bliže rubu mreže kako bi se smanjila potreba za odvijanjem obrade velikog skupa podataka na udaljenom i centralnom mjestu. Obrada na trećem sloju obuhvaća razne primjere poput: evaluacije, formatiranja, proširivanja/dekodiranja, redukcije i procjene značenja podataka.
 
 \subsection{Akumulacija podataka}
@@ -75,33 +75,89 @@ Na šestom sloju se nalazi aplikacijski sloj koji obavlja interpretaciju informa
 \subsection{Suradnja i procesi}
 Zadnji sedmi sloj referentnog modela uključuje ljude i poslovne procese. Ljudi koriste aplikacije i pridružene podatke za svoje specifične potrebe. Često, više ljudi koriste iste aplikacije za različite svrhe. Tako cilj cijelog sustava Interneta stvari nije sama aplikacija nego kao ispomoć u radu ljudi. Aplikacije pomažu ljudima kako bi mogli obavljati različite poslovne procese uz odgovarajuće podatke u pravo vrijeme. Poslovni procesi nerijetko uključuju rad i komunikaciju između više ljudi. Ljudi surađuju i komuniciraju međusobno kako bi potpora Interneta stvari bila korisna. Zato ti procesi zahtijevaju više koraka koji obuhvaća više aplikacija. Stoga zadnji sloj predstavlja višu razinu od jedne aplikacije.
 
-\section{Otvorena pitanja}
-a
+\section{Izazovi}
+Internet stvari kao pojam i skup tehnologija donosi i određene izazove. S obzirom na to da je Internet stvari široko područje koje ima različita područja primjene tako su i izazovi s kojima se kod razvoja, planiranja i održavanja sustava susreče brojni. U nastavku su nabrojani i opisani neki od tih izazova.
+%Treba dopisati
+
+\subsection{Heterogenost}
+Heterogenost se pojavljuje na svakom implementacijskom koraku Internet stvari sustava. Heterogenost uređaja, komunikacijskih, pristupnih i transportnih protokola, programske podrške i samih potreba korisnika. Naravno ovakva vrsta heterogenosti se javlja zbog različitih potreba i radnim procesa. Uređaji koji su koriste nude različite potrebe u vidu veličine, potrebe za vanjskim napajanjem te dometu komunikacijskih kanala, radilo se o žičanoj ili bežičnoj komunikaciji. Protokoli koji vrše komunikaciju između uređaja i nekog oblika prilaza također ovise o tim potrebama, radilo se o potrebi za velikim transportnim brzinama ili o korištenje radiokomunikacije niske snage kako bi se očuvala energija uređaja. Također treba li komunikacija biti pouzdana i sigurna ovisi o korištenju različitih transportnih protokola te kriptografskih algoritama. Na sve navedeno utječu i sami radni procesi i potrebe korisnika. Ovisno o tome sami sustavi su osmišljeni za potrebe korisnika.
+
+Heterogenost koja se javila u prvim razdobljima razvoja Interneta svari je povezano s nepostojanjem standardizacije i interoperabilnosti uređaja i postojećih programskih platformi. Tako se na primjeru pametnih domova pojavili različiti pametni uređaji od kojih je svaki zahtijevao vlastitu programsku platformu za upravljanje zbog nepostojanja interoperabilnosti s centralnim upravljačkim platformama. Kroz vrijeme su se pojavili zajednički napori prozivođača i različitih standardizacijskih tijela da se ovisno o području primjene Internet stvari sustava postigne standardizacija komunikacijskih protokola i semantike informacija kako bi se postigla bolja interoperabilnost.
+
+\subsection{Raspodijeljenost}
+Kako u sustavima Internet stvari sudjeluju različiti uređaji različitih prostornih lokacija tako se javlja i potreba za raspodijeljenosti sustava. Uređaji mogu biti mobilni što uvelike utječe na način pristupa kraljnjih programskih platformi s kojima uređaji komuniciraju. Od dovođenja uređaja u sustava, upravljanja uređaja, promatranja uređaja i samih aplikacija preko kojih se ti postupci provode se odvijaju raspodijeljenim putem. U nekim sustavima broj sudionika dostiže veliku brojku te je kod takvih sustava važno da se paralelno i konkurentno mogu odvajati aktivnosti. Otpornost na kvar je još jedan od zahtijeva koji prati raspodijeljene sustave kako bi se omogućo nesmetan rad sustava. Kod ispada i kvarova posljedice koje sustav Interneta stvari može imati na vanjski svijet je velik. Pogotovo u primjerima gdje se nadzire neki kritični sustavi poput industrijskih postrojenja. Također u pametnim domovima gdje različiti kučanski aparati su pretvoreni u pametne uređaje, kvarom poslužitelja mogu postati neupotrebljivi te je važno da postoji redudantnost servisa s kojima uređaji komuniciraju.
 
 \subsection{Sigurnost}
-a
+Sigurnost informacija i samih sustava je važan aspekt Interneta stvari u kojem sve više uređaja oko nas postaje umreženo. Problemi koji se javljaju su povezani s pokušajem brzog razvoja riješenja zbog konkurentnosti na tržištu, stavljanje u prvobitni plan funkcionalnosti sustava te dostupnosti prema korisnicima što stavlja sigurnost tih sustava u drugi plan. Kako mnogi uređaji i cjelokupni sustavi uvelike imaju kritične zadatke, poput medicinskih uređaja ili automobila, kompromitacija istih zbog sigurnosnih propusta može imati negativne posljedice. Također neki od primjera napada na sustave nije kako bi se napravila šteta sustavu već za iskorištavanje procesne snage sustava u botnetovima. Sigurnosni propusti se mogu poajviti na svakom dijelu sustava od uređaja, komunikacijskih kanala, poslužitelja, baza podataka i korisničkih sučelja sustavima. Neki od najvažnijih sigurnosnih zahtijeva na koje treba obratiti pozornost tijekom razvoja sustva Internet stvari je obrađeno u trećem poglavlju.
 
 \subsection{Privatnost}
-a
+Privatnost je uz sigurnost izazov s kojim se susreću mnogi sustavi Interneta stvari. Pametni uređaji koji se nalaze u našoj blizini imaju mogućnosti pratiti i bilježiti podatke o nama i našoj okolini. Kako korisnici priključuju sve više i više uređaja to je količina prikupljenih podataka veća čime i povreda privatnosti može imati negativne posljedice na korisnika. Povrede te privatnosti mogu dolaziti u različtim oblicima. Od osobnih informacija koje mogu detaljno identificirati korisnika daju mogućnost napada u obliku krađe identiteta, medicinskih podataka ili pristupnih lozinki različitim servisima do kompromitacije sigurnosnih kamera što dozvoljava napadačima izravno pračenje korisnika. Privatnost podataka koji nisu isključivo vezani uz krajnje korisnike su i podaci pravnih osoba gdje može doći do narušavanja poslovnih tajni, autentifikacijskih i autorizacijskih podataka za razne servise i sigurnosne sustave. Kako pristupiti zaštiti privatnosti je usko povezano sa sigurnošću sustava te je obrađeno u trećem poglavlju.
 
-\subsection{Skalabilnost}
-a
+\subsection{Integracija}
+Nove tehnologije donose i nove integracijske probleme sa sobom. U slučaju Interneta stvari ovaj izazov veći zbog heterogenosti svih dijelova koji čine sustave. U slučaju heterogenosti sloja podatkovne poveznice i količine različitih protokola koji se koriste postoji problem uvođenja novih prijamnika i prilaza za te uređaje. Radi li se o niskofrekventnim riješenjima poput NFC-a ili protokolima poput ZigBee postoji potreba korištenja posebnih čitaća ili prijamnika dok se taj problem ne pojavljuje kod WiFi protokola čija pristupna točka već postoji u većini domova. Nakon toga dolazimo do komunikacijske integracije između uređaja i poslužitelja, tj. programskih platformi. Na koji način će se odvijati prijenos podatka, kako će ti podaci biti organizirani te semantičko značenje tih istih podataka. Početkom razvoja riješenja Internet stvari prvobitno su svi sustavi imali vlastite pristupne aplikacije. S pojavom želje za automatizacijom i međusobnom komunikacijom između uređaja različitih proizvođača počele su se razvijati platforme koje omogućuju interoperabilnost među sustavima te mogućnost upravljanja i praćenja uređaja putem jedne pristupne aplikacije. Kroz razvoj tih platformi proizvođači su počeli integrirati nove i postojeće uređaje da budu kompatibilni s njima.
 
-\subsection{Decentraliziranost}
-a
-
-\section{Primjene}
-a
-
-\subsection{Područja primjene}
-a
-
-\subsection{Zahtijevi sustava s obzirom na primjenu}
-a
+\section{Područja primjene}
+Internet stvari je široko u svojem području primjena. U današnjem svijetu postaje sve prisutnije u svakom aspektu života ljudi i taj trend će se nastaviti. Od naših domova do industrijskih postrojenja Internet stvari omogućava pojednostavljenje naših života i posolvnih procesa. U nastavku su navedeni neke od glavnih područja primjene Interneta stvari i riješenja koja se koriste u tim područjima:
+\begin{itemize}
+    \item Pametni dom
+    \begin{itemize}
+        \item Pametna rasvjeta
+        \item Pametni kučanski aparati
+        \item Detekcija uljeza
+        \item Upravljanje energijom
+    \end{itemize}
+    \item Pametni grad
+    \begin{itemize}
+        \item Pametni parking
+        \item Upravljanje otpadom
+        \item Pametna rasvjeta
+        \item Reagiranje na hitne slučajeve
+    \end{itemize}
+    \item Okoliš
+    \begin{itemize}
+        \item Praćanje vremena
+        \item Praćenje zagađenja zraka
+        \item Praćenje zagađenja bukom
+        \item Detekcija požara
+    \end{itemize}
+    \item Prodaja
+    \begin{itemize}
+        \item Upravljanje inventarom
+        \item Pametni automati za prodaju
+        \item Pametne blagajne
+        \item Pametno plaćanje
+    \end{itemize}
+    \item Logistika
+    \begin{itemize}
+        \item Praćenje flote vozila
+        \item Praćenje pošiljaka
+        \item Dijagnostika vozila na daljinu
+        \item Generacija i vremensko raspoređivanje voznih ruta
+    \end{itemize}
+    \item Industrija
+    \begin{itemize}
+        \item Dijagnostika strojeva
+        \item Praćenje dijelova proizvodnje
+        \item Automatizacija procesa
+    \end{itemize}
+    \item Poljoprivreda
+    \begin{itemize}
+        \item Pametno navodnjavanje
+        \item Praćenje usjeva
+        \item Automatizacija obrađivanja
+    \end{itemize}
+\end{itemize}
 
 \section{Trendovi}
-a
+Internet svari se pojavio kao zamisao za daljnju budućnost, ali je već danas sadašnjost u socijalnim i proizvođačkim aspektima svijeta. Broj umreženih uređaja raste što je prikazano na sljedećoj slici. %doradi ovaj dio
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=16cm]{images/number-of-installed-iot.png}
+    \caption{Broj povezanih Internet stvari uređaja\citep{IotNumber}}
+    \label{fig:iotdevices}
+\end{figure}
 
+%Add stuff
 
 \chapter{Sigurnosni zahtijevi u Internetu stvari}
 
