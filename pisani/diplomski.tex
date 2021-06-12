@@ -3,6 +3,7 @@
 \usepackage[croatian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{pdfpages}
+\usepackage[justification=centering]{caption}
 
 \setcounter{secnumdepth}{3}
 \setcitestyle{numbers}
@@ -168,41 +169,23 @@ Ako promatramo porast broja umreženih Internet stvari uređaj možemo zaključi
 
 \chapter{Sigurnost u Internetu stvari}
 \section{Zahtjevi vezani uz sigurnost i privatnost}
+Važnost sigurnosti i privatnosti je nezamjenjiva. Ta važnost se pogotovo očituje u sustavima Internet stvari gdje je ponekad veći naglasak stavljen na funkcionalnost što stavlja sigurnosne zahtijeve u drugi plan. Jednostavni uređaji s malo procesorske snage imaju problema s obavljanjem zahtijevnijih kriptografskih algoritama te je studija iz 2019. godine utvrdila da od 56 milijuna ispitanih urežaja, 91.5\% razmjene podataka je bilo nešifrirano\citep{Greene2019May}. Nedostatak iskustva u području razvoja Internet stvari također utječe na slabu sigurnost uređaja jer ponekad planiranje ne utvrdi sve moguće sigurnosne propuste te zahtijeve koji su vezani uz sigurnost i privatnost. Ti zahtijevi su ključni dio očuvanja sigurnosti cijelokupnog sustava i privatnosti samih korisnika te su sljedeći:  
+\citep{InternetStvari}
+
 \begin{itemize}
-    \item Tajnost
-        \begin{itemize}
-            \item informcija nije dostupna ili izložena  neovlaštenim osobama, entitetima ili procesima
-        \end{itemize}
-    \item Cjelovitost
-        \begin{itemize}
-            \item točnost i potpunost informacije
-        \end{itemize}
-    \item Raspoloživost
-        \begin{itemize}
-            \item informacija je dostupna na zahtjev i omogućeno je njeno korištenje od strane ovlaštenih osoba, entiteta ili procesa
-        \end{itemize}
-    \item Vjerodostojnost
-        \begin{itemize}
-            \item osoba, entitet ili proces je zaista onaj kojim se predstavlja
-        \end{itemize}
-    \item Odgovornost
-        \begin{itemize}
-            \item obveza izvještavanja o aktivnostima i preuzimanja odgovornosti za njih
-        \end{itemize}
-    \item Neporicanje
-        \begin{itemize}
-            \item sposobnost dokazivanja događaja ili aktivnosti i osoba, entiteta ili procesa koji su ih pokrenuli ili u njima sudjelovali
-        \end{itemize}
-    \item Pouzdanost
-        \begin{itemize}
-            \item konzistentno ponašanje i rezultati
-        \end{itemize}
+    \item tajnost: informcija nije dostupna ili izložena  neovlaštenim osobama, entitetima ili procesima;
+    \item cjelovitost: točnost i potpunost informacije;
+    \item raspoloživost: informacija je dostupna na zahtjev i omogućeno je njeno korištenje od strane ovlaštenih osoba, entiteta ili procesa;
+    \item vjerodostojnost: osoba, entitet ili proces je zaista onaj kojim se predstavlja;
+    \item odgovornost: obveza izvještavanja o aktivnostima i preuzimanja odgovornosti za njih;
+    \item neporicanje: sposobnost dokazivanja događaja ili aktivnosti i osoba, entiteta ili procesa koji su ih pokrenuli ili u njima sudjelovali;
+    \item pouzdanost: konzistentno ponašanje i rezultati.
 \end{itemize}
 
 \section{OWASP Top 10}
 The Open Web Application Security Project® (OWASP) je neprofitna organizacija čiji je cilj napredak i poboljšanje računalne sigurnosti informacijskih sustava. OWASP kroz svoje projekte otvorenog koda vođenih putem razvojne zajednice radi na poboljšanju sigurnosti Interneta.
 
-\emph{OWASP Internet of Things Project} je projekt osmišljen kako bi pomogao proizvođačima, programerima i potrošačima bolji uvid i razumijevanje u sigurnosne probleme vezane uz Internet stvari. Na taj način korisnici u bilo kojem dijelu razvojnog procesa mogu donositi bolje odluke kod razvoja, postavljanja i pristupanja tehnologijama Interneta stvari.\citep{owasp1} 2018. godine izlazi \emph{OWASP IoT Top 10} lista koja reprezentira deset najčešćih ranjivosti Internet stvari sustava. Svih deset sigurnosnih ranjivosti su navedeni u nastavku uz opis sigurnosnih zahtijeva koji bi trebali spriječiti te ranjivosti i sigurnosne propuste. 
+\emph{OWASP Internet of Things Project} je projekt osmišljen kako bi pomogao proizvođačima, programerima i potrošačima bolji uvid i razumijevanje u sigurnosne probleme vezane uz Internet stvari. Na taj način korisnici u bilo kojem dijelu razvojnog procesa mogu donositi bolje odluke kod razvoja, postavljanja i pristupanja tehnologijama Interneta stvari.\citep{owasp1} 2018. godine izlazi \emph{OWASP IoT Top 10} lista koja reprezentira deset najčešćih ranjivosti Internet stvari sustava. Svih deset sigurnosnih ranjivosti su navedeni u nastavku uz opis sigurnosnih praksi koje bi trebale spriječiti te ranjivosti i sigurnosne propuste. 
 
 \subsection{Slabe, pogodljive ili tvrdo kodirane lozinke}
 Prvi navedeni sigurnosni problemi kod Internet stvari sustava su vezni uz lozinke. Kako bi se uređaju moglo pristupiti i naknadno ga konfigurirati, uređaji dolaze s korisničkim računima koji služe korisnicima kako bi ih mogli upariti sa željenim sustavim ili kako bi proizvođač mogao upravljati uređajem u slučaju pomoći korisnicima ili ažuriranja uređaja. Za pristup tom korisničkom računu uređaja je potrebna lozinka koju krajnji korisnik kod prve upotrebe treba postaviti. Navike korisnika su većinom da iskoriste njima dobro poznatu lozinku koju koriste i za svoje druge korisničke račune. Ako napadač dobije pristup jednoj njihovoj lozinci ima i pristup ostalim računima. Na taj način se pristup korištenim uređajima koji imaju isto korisničko ime ili e-mail adresu i lozinku uvelike olakšava. Korisnici imaju i naviku koristiti slabe lozinke koje su vrlo česte i jako lako pamtljive. Tako su neke od najčešće korištenih lozinka jednostavni nizovi numeričkih znakova ili nizovi znakova na tipkovnici poput: 123456, 123456789, qwerty, ili sam engleski prijevod lozinke \engl{password}.\citep{pass1}. Napadi na lozinke se provode putem takozvanih \emph{brute force} napada. Kako je procesna snaga današnjih računala dosegla vrlo visoke brzine računanja, tako se jednostavne i kratke lozinke mogu pogoditi u vrlo kratkom vremenu.
@@ -330,19 +313,54 @@ Kako bi se spriječila ili otežao fizički pristup uređajima potrebno je koris
 \chapter{Analiza i usporedba protokola}
 
 \section{Protokolni složaj Internet stvari}
-Iot stack
+Protokolni složaj Internet stvari se pobliže temelji na TCP/IP složaju koji podrazumijeva 5 slojeva u svom modelu. Ti slojevi su: fizički sloj, sloj podatkovne poveznice, mrežni, transportni i aplikacijski sloj. Svaki od tih slojeva sadrže različite protokole koji se koriste za komunikaciju na temelju fizičkih, komunikacijskih, identifikacijskih, pristupnih ili semantičkih karakteristika. Na sljedećoj slici su prikazani slojevi prisutni u složaju uz primjere nekih protokola prisutnih u protokolnom složaju Internet stvari, uz uređaje i senzore navedene kao nulti sloj jer su temelj svakog sustava Internet stvari. %Add more text
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=11cm]{images/iot-stack.png}
+    \caption{Protokolni složaj Internet stvari\citep{InternetStvari}}
+    \label{fig:iotstack}
+\end{figure}
 
 \section{Sloj uređaja}
-Senzori
+Sloj uređaja je bazni sloj u Internet stvari. Umrežavanjem tih uređaja i korištenjem njihovih senzorskih i aktuatorskih sposobnosti nam omogućava razvoj cjelokupnog sustava Internet stvari. Uređaji se sastoje od nekoliko komponenti: napajanja, radio primopredajnika, senzora, analogno-digitalnih pretvornika koji dolaze kao zasebni moduli te mikroprocesora, memorije i matične pločice kao jedan jedinstven mikrokontroler. Postoje i već potpuno integrirani uređaji koji sadrže sve prijespomenute module na jednoj razvojnoj pločici. Prikaz modula uređaja nalazi se na sljedećoj slici.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=14cm]{images/devicemodule.png}
+    \caption{Moduli uređaja Internet stvari\citep{InternetStvari}}
+    \label{fig:devicemodule}
+\end{figure}
 
-\subsection{Analiza uređaja}
-Uređaji
+Kod upotrebe Internet stvari uređaja postoji nekoliko zahtijeva koji se razlikuju s obzirom na primjenu. Neki od zahtijeva su: izrazito male dimenzije, mala potrošnja energije, niska cijena, umrežavanje na načelu samoorganizacije. Male dimenzije su potrebne kako bi uređaji djelovali neinvazivno na prostor u kojem se nalaze. Mala potrošnja energije je bitan zahtijev jer dio uređaja je mobilno te nema stalan izvor napajanja već koristi baterije koje nemaju veliki kapacitet ili solarne ćelije čija stopa punjenja nije visoka. Zbog energetske učinkovitosti uređaji imaju ograničenu procesorsku moć te je memorijski kapacitet ograničen. Najveća potrošnja energije se dešava na komunikacijskim modulima čija snaga signala otpada s kvadratom udaljenosti. Svi ti zahtijevi se trebaju uzeti u obzir tijekom planiranja kako bi se mogao utvrditi potreban uređaj za namjenjenu primjenu.
 
-\subsubsection{Senzori s komunikacijskim modulom}
-a
+U nastavku će biti navedeni primjeri senzorskih pločica, komunikacijskih modula te analiza pristupnih uređaja od kojih su neki potpuno integrirani kao jedna razvojna pločica.
 
-\subsubsection{Pristupni uređaji}
-a
+\subsection{Senzorske pločice}
+Uloga senzorskih pločica je očitanja vanjskih fizičkih stvari što je jedna od glavnih mogućnosti sustava Internet stvari. Senzori prisutni na pločicama omogućuju opažanje različitih vanjskih fizičkih pojava poput: temperature, prisutnosti, pokreta, zvuka, koncentracije plinova, magnetskih polja, protoka vode. Integracija tih pločica s mikrokontrolerima omogućuje procesiranja tih opažanja. Primjer senzorske pločice s mogućnošću očitanja razine buke, temperature i luminacijskog intenziteta.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=9cm]{images/sensor_board.jpg}
+    \caption{Senzorska pločica s mogućnošću očitanja razine buke, temperature i luminacijskog intenziteta\citep{SensorBoard}}
+    \label{fig:sensorboard}
+\end{figure}
+
+\subsection{Komunikacijski moduli}
+Komunikacijski moduli omogućuju uređajima da se umreže u ostatak sustava čime se ostvaruje glavni zahtijev u Internet stvarima što je povezanost i mogućnost komunikacije. Moduli potrebni za komunikaciju ovise o fizičkom sloju i o sloju podatkovne poveznice. Fizički sloj uvjetuje fizički medij u kojem se podaci prenose. Žičani mediji su: bakrena žica u kojem se radi o elektronima i optički kablovi gdje se informacije prenose fotonima. Bežični mediji su: optički koji ne koriste kablove već usmjerene laserske snopove koji putuju kroz zrak i radio valove čije različite frekvencije koriste različiti protokoli sloja podatkovne poveznice. 
+
+Sloj podatkovne poveznice čine protokoli koji u osnovi opisuju način komunikacije putem fizičkog sloju. Na ovom sloju heterogenost protokola je najprisutnija, posebno kod protokola koji koriste radio valove kao fizički medij. Ta heterogenost se javlja zbog različitih potreba i primjena u sustavima. Tako na ovom imamo različite protokole koji će biti obrađeni u sklopu analize protokola podatkovne poveznice. U nastavku je prikazan komunikacijski modul za ZigBee protokol.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=7cm]{images/zigbee-module.jpg}
+    \caption{ZigBee komunikacijski modul\citep{ZigBeemodule}}
+    \label{fig:zigbeemodule}
+\end{figure}
+
+\subsection{Analiza pristupnih uređaja}
+\subsubsection{Raspberry Pi 4}
+\subsubsection{Raspberry Pi Pico}
+\subsubsection{Arduino Uno Rev3 }
+\subsubsection{Waspmote}
+\subsubsection{Pycom fipy}
+\subsubsection{ESP32}
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 a
