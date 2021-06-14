@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{pdfpages}
 \usepackage[justification=centering]{caption}
+\usepackage{array}
 
 \setcounter{secnumdepth}{3}
 \setcitestyle{numbers}
@@ -245,6 +246,7 @@ Za očuvanje privatnosti korisnika i načine obrade podataka korisnika u Europsk
 Enkripcija komunikacijskih kanal nekada ne osigurava i privatnost korisnika. Kako bi pametni uređaji mogli komunicirati s krajnjim poslužiteljima, koji mogu mijenjati svoju odredišnu adresu, koriste se domenska imena. Za razlučivanje tih adresa u brojčanje IP adrese koristi se protokol DNS\engl{Domain Name System}. Kada uređaji rade DNS upite u sadržaju upita se prikazuje i domena upita u nekriptiranom formatu. Na taj način napadač može iz konteksta upita zaključiti koji uređaji proizvođača se nalaze u mreži korisnika. Za neke uređaje je moguće zaključiti i sam tip, a ne samo proizvođač. U sljedećoj tablici možemo vidjeti uređaje i DNS upite koje proizvode:
 \begin{table}[h]
     \centering
+    \caption{Primjer DNS upita napravljenih od strane uređaja \citep{Apthorpe2017May}}
     \begin{tabular}{| c | c |} 
     \hline
     \textbf{Uređaj} & \textbf{DNS upiti} \\
@@ -261,9 +263,9 @@ Enkripcija komunikacijskih kanal nekada ne osigurava i privatnost korisnika. Kak
      & softwareupdates.amazon.com \\
     \hline
     \end{tabular}
-    \caption{Primjer DNS upita napravljenih od strane uređaja \citep{Apthorpe2017May}}
     \label{tab:confusion}
 \end{table} \\
+
 Još jedan način na koji se može zaključiti o trenutnoj aktivnosti korisnika u vlastitoj mreži je i broj paketa koji se šalje u danom trenutku van mreže i njihova periodičnost. Ako se radi o uređaju koji ima mogućnosti virtualnog asistenta moguće je imati uvid u to kada je korisnik imao interakciju s uređajem. Također kod uređaja koji prate spavanje korisnika se broj razmijenjenih paketa drastično poveća kada korisnik spava.\citep{Apthorpe2017May}
 
 Kako najbolje očuvati privatnost korisnika je pitanje s kojim još uvijek mnogi prozivođači imaju problema. To se očituje u ostalim navedenim sigurnosnim propustima u ovom odjeljku. Zakonskim regulativama postiže se veća svijest o bitnosti zaštite podataka te se samim time proizvođači tjeraju na bolje prakse za očuvanjem podataka. Neki od osnovnih načina zaštite korisničkih podataka su: 
@@ -338,7 +340,7 @@ U nastavku će biti navedeni primjeri senzorskih pločica, komunikacijskih modul
 Uloga senzorskih pločica je očitanja vanjskih fizičkih stvari što je jedna od glavnih mogućnosti sustava Internet stvari. Senzori prisutni na pločicama omogućuju opažanje različitih vanjskih fizičkih pojava poput: temperature, prisutnosti, pokreta, zvuka, koncentracije plinova, magnetskih polja, protoka vode. Integracija tih pločica s mikrokontrolerima omogućuje procesiranja tih opažanja. Primjer senzorske pločice s mogućnošću očitanja razine buke, temperature i luminacijskog intenziteta.
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=9cm]{images/sensor_board.jpg}
+    \includegraphics[width=5.5cm]{images/sensor_board.jpg}
     \caption{Senzorska pločica s mogućnošću očitanja razine buke, temperature i luminacijskog intenziteta\citep{SensorBoard}}
     \label{fig:sensorboard}
 \end{figure}
@@ -349,21 +351,94 @@ Komunikacijski moduli omogućuju uređajima da se umreže u ostatak sustava čim
 Sloj podatkovne poveznice čine protokoli koji u osnovi opisuju način komunikacije putem fizičkog sloju. Na ovom sloju heterogenost protokola je najprisutnija, posebno kod protokola koji koriste radio valove kao fizički medij. Ta heterogenost se javlja zbog različitih potreba i primjena u sustavima. Tako na ovom imamo različite protokole koji će biti obrađeni u sklopu analize protokola podatkovne poveznice. U nastavku je prikazan komunikacijski modul za ZigBee protokol.
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=7cm]{images/zigbee-module.jpg}
+    \includegraphics[width=6cm]{images/zigbee-module.jpg}
     \caption{ZigBee komunikacijski modul\citep{ZigBeemodule}}
     \label{fig:zigbeemodule}
 \end{figure}
 
 \subsection{Analiza pristupnih uređaja}
-\subsubsection{Raspberry Pi 4}
+\subsubsection{Raspberry Pi 4 Model B}
+Raspberry Pi je svojom pojavom na tržištu ponudio malo integrirano računalo za nisku cijenu čime je razvoj Internet stvari postao pristupačniji za širu zajednicu. Zadnja verzija Pi računala je četvrta s time da sve tri prijašnje verzije se još uvijek u priozvodnji. Razlika između verzija je u procesorskoj snazi, radnoj memoriji, prisutnosti Ethernet i WiFi modula te broju USB i HDMI priključaka. Na Raspberry Pi-u se izvršava GNU/Linux operativni sustav čime se uvelike olakšava razvoj aplikacija i dobiva podrška za već postojeća programska rješenja. Na računalu se nalaze 40 priključnih pinova\engl{GPIO pins} koji omogućuju spajanje različitih senzorskih pločica, komunikacijskih modula, napajanja i zaslona čime se postiže visoka modularnost. Raspberry Pi je namjenjen kao stacionaran uređaj zbog njegove relativno visoke potrošnje energije s obzirom na integrirana računala s mikrokontrolerom što zahtijeva konstantan izvor napajanja putem strujnog adaptera. Neke od namjena su kao prilaz za ostale pametne uređaje zbog svoje procesorske snage, kao kontrolni centar sustav za pametan dom korištenjem platformi poput Home Assistanta, a spajanjem modula kamere Rapberry postaje nadzorna kamera. 
+
+Raspberry Pi 4 Model B\citep{RPi4} je računalo koji poprima karakteristike stolnog računala. Tako sadrži Broadcom BCM2711, četverojezgreni Cortex-A72 (ARM v8) 64-bit SoC \engl{System on a chip}, 2,4 ili 8 gigabajta radne memorije, gigabitni Ethernet priključak, WiFi modul te 2 micro-HDMI priključka koji podržavaju do 4K 60Hz monitore.  Te specifikacije dozvoljavaju korištenje RPi4 kao malo stolno računalo, a ne samo kao ugradbeno računalo s nekoliko senzora. Podrška za programske jezike koji se koriste za razvoj nije ograničen s obzirom na to da uređaj može izvršavati GNU/Linux operativni sustav. Na sljedećoj slici je prikazan Raspberry Pi 4.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=8.5cm]{images/rpi4.jpg}
+    \caption{Raspberry Pi 4\citep{RPi4Img}}
+    \label{fig:rpi4}
+\end{figure}
+
 \subsubsection{Raspberry Pi Pico}
-\subsubsection{Arduino Uno Rev3 }
-\subsubsection{Waspmote}
-\subsubsection{Pycom fipy}
+Raspberry Pi Pico\citep{RPiPico} je malo integrirano računalo s mikrokontrolerom niske cijene. Pico za razliku od ostalih Raspberry Pi računala ne koristi Broadcom SoC već vlastiti RP2040 mikrokontroler čime se uvelike smanjuje potrošnja energije, ali i procesorska snaga samog računala. Sadrži 264KB SRAM-a te 2MB brze memorije čime je veličina izvršavajućih programa uvelike ograničena. Pico je veličine 21x51mm te tako uz svoju malu potrošnju energije dozvoljava da bude korišten za mobilne potrebe, a sa svojim 26 priključnih pinova dopušta visoku razinu modularnosti. Pristup uređaju se izvodi putem jednog micro-USB 1.1 priključka ili putem UART pinova, ali nema ugrađenih komunikacijskih modula te ako se želi omogućiti pristup mreži potrebno je koristiti zasebne module. Napajanje se provodi putem USB priključka ili putem vanjske baterije spojene na odgovarajuče pinove. Raspberry Pi Pico je ograničen na jednostavne senzorske i aktuatorske primjene zbog svoje ograničene procesorske brzine i kapaciteta pohrane podataka. Podrška za programske jezike koji se koriste za razvoj uređaja je ograničen na  MicroPython, CircuitPython, C/C++ te Arduino programski jezik. Uređaj je prikazan na sljedećoj slici.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=5cm]{images/rpipico.jpg}
+    \caption{Raspberry Pi Pico\citep{RPiPicoImg}}
+    \label{fig:rpipico}
+\end{figure}
+
+\subsubsection{Arduino Uno Rev3}
+Arduino je jedan od največih proizvođača malih razvojnih intergriranih računala s mikrokontorlerom koji sadrži različite vrste tih računala koja se razlikuju u dimenzijama, priključcima i cijeni. Arduino Uno Rev3\citep{ArduinoUno} je jedno od tih integriranih računala koje je u svojoj prvoj verziji populariziralo i omogućilo jednostavan i jeftin razvoj za Internet stvari sustave. Shema cijele pločice je hardver otvorenog izvora te je moguće pronači taj isti uređaj od drugog proizvođača. Treća revizija donosi 8 bitni ATmega328P mikrokontroler koji radi na frekvenciji od 16MHz sa 2KB SRAM-a te 32KB programabilne brze memorije. Na pločici se nalazi 20 priključnih pinova od kojih je 14 digitalnih te 6 analognih, uz jedan USB priključak putem kojeg se napaja i jedan zaseban priključak za napajanje. Zbog svojeg otvorene i dobro dokumentirane sheme za ovaj uređaj postoji mnoštvo različitih senzorskih pločica i komunikacijskih modula koje je potrebno priključiti ako želimo povezati uređaj na mrežu. Glavna namjena Arduino Una je za brz razvoj jednostavnih Internet stvari rješenja te zbog svoje pristupačnosti je moguće pronači mnoštvo gotovih projekta kako za senzorska tako i za aktuatorska rješenja. Podrška za programske jezike koji se koriste za razvoj uređaja je ograničen na C/C++ te Arduino programski jezik. Na sljedećoj slici je prikazan uređaj. 
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=6.8cm]{images/arduinouno.jpg}
+    \caption{Arduino Uno Rev3\citep{ArduinoUno}}
+    \label{fig:arduinouno}
+\end{figure}
+
+\subsubsection{Libelium Waspmote}
+Waspmote\citep{Waspmote} je bežična senzorska platforma otvorenog koda posebno usmjerena na implementaciju načina rada s malom potrošnjom koja omogućuje čvorovima senzora da budu potpuno autonomni zajedno s prispojenom baterijom. Životni vijek jednog čvora može trajati od 1 do 5 godina, ovisno o radnom ciklusu i korištenim komunikacijskim modulom. Waspmote se temelji na modularnoj arhitekturi gdje je ideja integrirati samo module potrebne kako bi se optimizirao rad uređaja. Podržani moduli čine mnoštvo komunikacijskih, podatkovnih modula te senzorskih pločica. Waspmote sadrži 8-bitni ATmega1281 mikrokontroler koji radi na frekvenciji od 14.74MHz, SRAM od 8KB, 128KB programibilne brze memorije te podršku za SD kratice i mini USB priključak. Jedini programski jezik za razvoj je C++. Na sljedećoj slici je prikazan Libelium Waspmote.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=8.9cm]{images/waspmote.png}
+    \caption{Libelium Waspmote\citep{Waspmote}}
+    \label{fig:waspmote}
+\end{figure}
+
 \subsubsection{ESP32}
+Ravijen od strane Espressif Systema, ESP32\citep{ESP32} je malo integrirano računalo s mikrokontorolerom niske cijene. ESP32 dolazi s integriranim komunikacijskim modulima za WiFi 802.11 b/g/n i Bluetooth s podrškom za BLE(Bluetooth Low Energy). Na pločici se nalazi dvojezgreni Tensilica Xtensa LX6 mikroprocesor s radnom frekvencijom do 240MHz, SRAM od 512KB, 4MB programabilne memorije, jedan micro USB priključak te 34 priključnih pinova. Napajanje se provodi putem USB priključka ili putem vanjske baterije spojene na odgovarajuče pinove. ESP32 je kod primjene najviše zastupljen kod mobilnih primjena zbog svoje niske potrošnje energije i malih dimenzija. Podrška za programske jezike koji se koriste za razvoj uređaja je ograničen na  MicroPython, CircuitPython, Lua, C/C++ te Arduino programski jezik. Prikaz ESP32 računala proizvedenog od strane Joy-IT-a je prikazan na sljedećoj slici.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=4.8cm]{images/esp32.png}
+    \caption{Joy-IT NodeMCU-ESP32\citep{ESP32Img}}
+    \label{fig:esp32}
+\end{figure}
+
+\subsubsection{Pycom FiPy}
+Pycom FiPy\citep{Fipy} je malo integrirano računalo temeljeno na ESP32 integriranom računalu. Uz sve prije navedene karakteristike i funkcionalnosti ESP32, FiPy sadrži 8MB programabilne memorije i integrirane komunikacijske module za LoRa, Sigfox i LTE-M. Kao i ESP32 FiPy se koristi za pretežito mobilne primjene zbog velikog broja integriranih bežičnih komunikacijskih modula koji dozvoljavaju velike udaljenosti od baznih prilaza što je posebno izraženo ako se koristi komunikacija putem Sigfoxa čiji domet je do 50 kilometara, LoRa čiji domet je do 40 kilometara i LTE-M čiji domet je do 10 km. Na sljedećoj slici je prikazan Pycom FiPy.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=5.5cm]{images/fipy.png}
+    \caption{Pycom FiPy\citep{Fipy}}
+    \label{fig:fipy}
+\end{figure}
+
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 a
+\newcolumntype{L}{>{\centering\arraybackslash}m{2cm}}
+\begin{table}[h]
+    \centering
+    \caption{Komparacija pristupnih uređaja}
+    \begin{tabular}{|L|L|L|L|L|L|} 
+    \hline
+    \textbf{Pristupni uređaj} & \textbf{Povezanost} & \textbf{Nešto} & \textbf{Sigurnosni mehanizmi} & \textbf{Primjena} & \textbf{Nešto drugo}\\
+    \hline\hline
+    Raspberry Pi 4 Model B & da & da & da & da & da\\
+    \hline
+    Raspberry Pi Pico & da & da & da & da & da\\
+    \hline
+    Arduino Uno Rev3 & da & da & da & da & da\\
+    \hline
+    Libelium Waspmote & da & da & da & da & da\\
+    \hline
+    ESP32 & da & da & da & da & da\\
+    \hline
+    Pycom FiPy & da & da & da & da & da\\
+    \hline
+    \end{tabular}
+    \label{tab:devices}
+\end{table} \\
 
 \section{Sloj podatkovne poveznice}
 a
@@ -383,7 +458,7 @@ a
 \subsubsection{ZigBee}
 a
 
-\subsubsection{LTE}
+\subsubsection{LTE-M}
 a
 
 \subsubsection{SigFox}
