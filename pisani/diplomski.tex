@@ -171,18 +171,17 @@ Ako promatramo porast broja umreženih Internet stvari uređaj možemo zaključi
 
 \chapter{Sigurnost u Internetu stvari}
 \section{Zahtjevi vezani uz sigurnost i privatnost}
-Važnost sigurnosti i privatnosti je nezamjenjiva. Ta važnost se posebice očituje u sustavima Internet stvari gdje je ponekad veći naglasak stavljen na funkcionalnost što stavlja sigurnosne zahtijeve u drugi plan. Jednostavni uređaji s malo procesorske snage imaju problema s obavljanjem zahtijevnijih kriptografskih algoritama te je studija iz 2019. godine utvrdila da od 56 milijuna ispitanih urežaja, 91.5\% razmjene podataka je bilo nešifrirano\citep{Greene2019May}. Nedostatak iskustva u području razvoja Internet stvari također utječe na slabu sigurnost uređaja jer ponekad planiranje ne utvrdi sve moguće sigurnosne propuste te zahtijeve koji su vezani uz sigurnost i privatnost. Ti zahtijevi su ključni dio očuvanja sigurnosti cijelokupnog sustava i privatnosti samih korisnika te su sljedeći:  
-\citep{InternetStvari}
+Važnost sigurnosti i privatnosti je nezamjenjiva. Ta važnost se posebice očituje u sustavima Internet stvari gdje je ponekad veći naglasak stavljen na funkcionalnost što stavlja sigurnosne zahtijeve u drugi plan. Jednostavni uređaji s malo procesorske snage imaju problema s obavljanjem zahtijevnijih kriptografskih algoritama te je studija iz 2019. godine utvrdila da od 56 milijuna ispitanih urežaja, 91.5\% razmjene podataka je bilo nešifrirano\citep{Greene2019May}. Nedostatak iskustva u području razvoja Internet stvari također utječe na slabu sigurnost uređaja jer ponekad planiranje ne utvrdi sve moguće sigurnosne propuste te zahtijeve koji su vezani uz sigurnost i privatnost. Ti zahtijevi su ključni dio očuvanja sigurnosti cijelokupnog sustava i privatnosti samih korisnika. Sigurnosni zahtijevi vezani uz sigurnost i privatnost su sljedeći\citep{InternetStvari}:
 
-\begin{itemize}
-    \item tajnost: informcija nije dostupna ili izložena  neovlaštenim osobama, entitetima ili procesima;
-    \item cjelovitost: točnost i potpunost informacije;
-    \item raspoloživost: informacija je dostupna na zahtjev i omogućeno je njeno korištenje od strane ovlaštenih osoba, entiteta ili procesa;
-    \item vjerodostojnost: osoba, entitet ili proces je zaista onaj kojim se predstavlja;
-    \item odgovornost: obveza izvještavanja o aktivnostima i preuzimanja odgovornosti za njih;
-    \item neporicanje: sposobnost dokazivanja događaja ili aktivnosti i osoba, entiteta ili procesa koji su ih pokrenuli ili u njima sudjelovali;
-    \item pouzdanost: konzistentno ponašanje i rezultati.
-\end{itemize}
+\begin{description}
+    \item[Tajnost:]informacija nije dostupna ili izložena  neovlaštenim osobama, entitetima ili procesima.
+    \item[Cjelovitost:]točnost i potpunost informacije.
+    \item[Raspoloživost:]informacija je dostupna na zahtjev i omogućeno je njeno korištenje od strane ovlaštenih osoba, entiteta ili procesa.
+    \item[Vjerodostojnost:]osoba, entitet ili proces je zaista onaj kojim se predstavlja.
+    \item[Odgovornost:]obveza izvještavanja o aktivnostima i preuzimanja odgovornosti za njih.
+    \item[Neporicanje:]sposobnost dokazivanja događaja ili aktivnosti i osoba, entiteta ili procesa koji su ih pokrenuli ili u njima sudjelovali.
+    \item[Pouzdanost:]konzistentno ponašanje i rezultati.
+\end{description}
 
 \section{OWASP Top 10}
 The Open Web Application Security Project® (OWASP) je neprofitna organizacija čiji je cilj napredak i poboljšanje računalne sigurnosti informacijskih sustava. OWASP kroz svoje projekte otvorenog koda vođenih putem razvojne zajednice radi na poboljšanju sigurnosti Interneta.
@@ -477,7 +476,8 @@ Mrežni sloj u složaju Internet stvari omogućava prijenos informacija od prila
 
 \subsection{Analiza protokola}
 \subsubsection{IPv4}
-a
+IPv4 
+
 \subsubsection{IPv6}
 a
 
@@ -494,23 +494,66 @@ Transportni sloj je odgovoran za komunikaciju između dva aplikacijska procesa p
 TCP je konekcijsko orijentirani protokol koji za uspostavu konekcije koristi trosmjerno rukovanje. Neka od glavnih svojstva TCP-a su pouzdani prijenos paketa, detekcija pogrešaka, ponovni prijenos kod isteka vremena te kontrola toka i zagušenja. Pouzdani prijenos paketa se postiže korištenjem sekvencijskih brojeva koji identificiraju svaki bajt podataka. Nakon slanja paketa pošiljatelj čeka na potvrdu od primatelja da je primio poslani paket. Detekcija pogrešaka je vezana uz potvrdu primatelja jer se tako može detektirati ako je neki od paketa izgubljen te se ponovno poslati. Pogreške se također detektiraju pomoću kontrolne sume u zaglavlju čime se utvrđuje ispravnost paketa. Ponovnim prijenosom kod isteka vremena se čeka određeno vrijeme na potvrdu primatelja o primljenom paketu te ako dođe do isteka vremena se paket ponovno šalje. Kontrolom toka i zagušenja se upravlja brzinom i veličinom slanja paketa kako bi se pouzdano mogli pošiljati paketi bez preopterećenja primatelja u slučaju male propusnosti mreže ili opterećenja primatelja.
 
 \subsubsection{UDP}
-UDP je za razliku od TCP-a beskonekcijski protokol koji sadrži svojstva TCP-a za pouzdani prijenos paketa osim detekcije pogrešaka korištenjem kontrolne sume. UDP sadrži 4 polja zaglavlja: izvorišna i odredišna vrata, duljina paketa i kontrolna suma. UDP je namijenjen brzim i vremenski osjetljivim namjenama.
+UDP je za razliku od TCP-a beskonekcijski protokol koji ne sadrži svojstva TCP-a za pouzdani prijenos paketa osim detekcije pogrešaka korištenjem kontrolne sume. UDP sadrži 4 polja zaglavlja: izvorišna i odredišna vrata, duljina paketa i kontrolna suma. UDP je namijenjen brzim i vremenski osjetljivim namjenama.
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
-a
+Svojstva TCP-a omogućava pouzdani prijenos podataka između dvije krajnje točke. Na taj način se osigurava da informacije budu dostavljene bez pogrešaka i u cijelosti. Za razliku UDP nema mehanizme pouzdanog prijenosa podataka što rezultira brzom prijenosu jer ne postoji potreba za dodatnom obradom i kontrolom paketa. 
+
+Područja primjene UDP-a je u aplikacijama kojima je brzina prijenosa važnija od cijelovitosti i točnosti informacija poput video poziva, mrežnih igara i reprodukciji video snimaka. Područja primjene TCP-a je u aplikacijama gdje je pouzdanost informacija ključna poput bankovnih sustava, internet trgovini i elektroničkoj pošti.
 
 \section{Aplikacijski sloj}
-Aplikacijski sloj je zadnji sloj složaja u Internet stvari preko kojeg se izvodi izravna komunikacija između aplikacija. Protokoli ovog sloja omogućuju postavljanje komunikacijskih pravila između aplikacija kako bi način razmijene podataka bio standardiziran. Aplikacijski sloj sadrži jako veliki broj protokola čija namjena je s obzirom na primjenu jako različita. U nastavku su analizirani i uspoređeni tri protokola aplikacijskog sloja koja su najviše zastupljena u Internet stvari.
+Aplikacijski sloj je zadnji sloj složaja Internet stvari preko kojeg se izvodi izravna komunikacija između aplikacija. Protokoli ovog sloja omogućuju postavljanje komunikacijskih pravila između aplikacija kako bi način razmijene podataka bio standardiziran. Aplikacijski sloj sadrži jako veliki broj protokola čija namjena je s obzirom na primjenu jako različita. U nastavku su analizirana i uspoređena četiri protokola aplikacijskog sloja koja su najviše zastupljena u Internet stvari.
 
 \subsection{Analiza protokola}
-\subsubsection{HTTP/S}
-a
+\subsubsection{HTTP}
+HTTP \engl{Hypertext Transfer Protocol} je protokol na aplikacijskom sloju za distribuirane, kolaborativne, hipermedijske sustave te koristi TCP kao bazu za komunikaciju između poslužitelja i klijenta. HTTP je u svom začetku bio osmišljen kao protokol za razmjenu hiperteksta, dok je danas zaslužan za razmjenu raznih hipermedijskih sadržaja, tj. teksta, slike, zvuka i videa te kao takav ima najveći udio prometa na Internetu među aplikacijskim protokolima. HTTP koristi URI \engl{Universal Resource Identifier} shemu za identificiranje resursa na mrežnoj lokaciji te koristi vrata 80 TCP-a. HTTP djeluje na temelju zahtijeva i odgovora gdje klijent zahtijeva resurs koristeći URI i definirane HTTP metode te na temelju zahtijeva dobiva odgovor od poslužitelja koji sadrži status odgovora, neobavezna polja zaglavlja te zahtijevani resurs u tijelu poruke ukoliko status odgovora poprima format 2XX. Zahtijevi osim tijela poruke također mogu sadržavati neobavezna polja zaglavlja koja daju više informacija vezana uz zahtijev poput zaglavlja koja imaju sigurnosne mehanizme: \emph{Content-MD5} polje koje služi za provjeru integriteta poruke korištenjem MD5 algoritma za izračunavanje kontrolne sume, \emph{Authorization} polje koje omogućuje autorizaciju korisnika na poslužitelju korištenjem korisničkog imena i lozinke kodirane \emph{Base64} kodnom stranicom ili neke druge vrste autorizacije. HTTP ima nekoliko verzija protokola od kojih su trenutno najzastupljenije HTTP/1.1 i HTTP/2 koje u suštini ne nude prevelike razlike osim veće brzine verzije dva zbog boljeg upravljanja zahtijevima, kompresijom zaglavlja i bolje upotrebe TCP konekcija. Trenutno je u razvoju treća verzija protokola koja kao protokol transportnog sloja koristi UDP i kao zadano donosi šifriranje podataka.
 
-\subsubsection{COAP}
-a
+\subsubsection{HTTP/S}
+HTTP/S \engl{Hypertext Transfer Protocol Secure} je nadogradnja HTTP-a uz korištenje kriptografskog protokola TLS \engl{Transport Layer Security} za šifriranje i autentifikaciju. HTTPS kao i HTTP koristi URI shemu za identificiranje resursa na mrežnoj lokaciji, a umjesto vrata 80 koristi vrata 443 TCP-a. TLS podržava razne kriptografske algoritme za šifriranje te digitalne certifikate za autentifikaciju. Verzija TLS-a koja se preporuča za korištenje je TLS 1.3 zbog pronađenih sigurnosnih propusta u prijašnjim verzijama. Postupak kojim se omogućava šifriranje i autentifikacija TLS-om se naziva rukovanje i dolazi nakon uspostava TCP konekcije te se izvodi u sljedećim koracima\cite{TLS}:
+\begin{enumerate}
+    \item\textbf{"Client hello" poruka:} Klijent inicira rukovanje slanjem "hello" poruke poslužitelju. Poruka sadržava verzije TLS-a i kriptografske algoritme koje klijent podržava te slučajno generirani niz znakova.
+    \item\textbf{"Server hello" poruka:} Poslužitelj odgovara klijentu sa vlastitom "hello" porukom koja sadrži poslužiteljev digitalni certifikat, odabrani kriptografski algoritam i novi slučajno generirani niz znakova.
+    \item\textbf{Autentifikacija:} Klijent autentificira poslužitelja koristeći certifikacijsko tijelo koje je izdalo certifikat. Na taj način klijent potvrđuje da je poslužitelj onaj koji tvrdi da je i da klijent komunicira sa stvarnim vlasnikom domene.
+    \item\textbf{Tajna koja prethodi glavnoj:} Klijent ponovno šalje novi slučajno generirani niz znakova, takozvana tajna koja prethodi glavnoj. Taj niz znakova je šifriran javnim ključem poslužitelja koji je bio dostavljen u digitalnom certifikatu.
+    \item\textbf{Korištenje privatnog ključa:} Poslužitelj dešifrira primljeni šifrirani niz znakova koristeći vlastiti privatni ključ.
+    \item\textbf{Kreiranje ključa sjednice:} Klijent i poslužitelj kreiraju simetrični ključ sjednice iz prvog klijentskog slučajnog niza znakova, poslužiteljevog slučajnog niza znakova i tajne koja prethodi glavnoj.
+    \item\textbf{Klijent je spreman:} Klijent šalje "finished" poruku koja je šifrirana sa ključem sjednice.
+    \item\textbf{Poslužitelj je spreman:} Poslužitelj šalje "finished" poruku koja je šifrirana sa ključem sjednice.
+    \item\textbf{Postignuto je sigurno simetrično šifriranje:} Rukovanje je dovršeno i dalje se može izvoditi šifrirana komunikacija.
+\end{enumerate}
+Na sljedećoj slici je prikazan postupak TCP i TLS rukovanja potreban kako bi se uspostavila HTTP/S sjednica.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=14cm]{images/tls.png}
+    \caption{Prikaz TCP i TLS rukovanja\citep{TLS}}
+    \label{fig:tls}
+\end{figure}
+
+\subsubsection{CoAP}
+CoAP \engl{Constrined Application Protocol} je specijalizirani 
 
 \subsubsection{MQTT}
-a
+MQTT \engl{Message Queuing Telemetry Transport} je lagani protokol temeljen na porukama, koristi TCP kao protokol transportnog sloja na vratima 1883 te se bazira na topologiji PUSH/SUBSCRIBE. Arhitektura MQTT protokola sadrži dvije vrste sudionika: klijente i posrednike \engl{broker}.Posrednik je poslužitelj s kojim klijenti komuniciraju putem poruka te posrednik prosljeđuje te poruke na ostale klijente. Na taj način klijenti ne komuniciraju s ostalim klijentima već putem posrednika. Svaki klijent može biti izdavač \engl{publisher}, pretplatnik \engl{subscriber} ili oboje. 
+
+MQTT je protokol temeljen na događajima te na taj način nema periodičnog ili stalnog prijenosa podataka čime se smanjuje količina prijenosa. Izdavač šalje poruke jedino kada ima informacije za slanje, a posrednik prosljeđuje poruke pretplatnicima kada primi nove informacije. Još jedan način smanjenja količine prijenosa podataka je korištenjem strogo definiranom, malom konstrukcijom poruka. Svaka poruka sadrži zaglavlje od samo dva bajta, ali može sadržavati i dodatno neobavezno zaglavlje, dok je sadržaj poruke ograničen na 256MB. Tri različite razine kvalitete usluge su dostupne kako bi se moglo odabrati između smanjenja količine i osiguravanja pozudanosti prijenosa podataka. Nulta razina definira slanje poruka pretplatnicima bez potvrde je li poruka primljena, kod prve razine posrednik čeka potvrdu poruke te ako dođe do isteka vremena poruka se ponovno šalje te na taj način pretplatnik može poruku primiti više puta. Druga razina koristi četverostruko rukovanje između klijenta i posrednika kako bi se osiguralo da je poruka primljena i to točno jedan put. Za prvu i drugu razinu poruke se spremaju za klijente koji nisu trenutno dostupni te se ponovno šalju kada klijent postane ponovno dostupan. Na sljedećoj slici je prikazana topologija sudionika MQTT protokola.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=13cm]{images/mqtt.png}
+    \caption{Topologija sudionika MQTT protokola\citep{MQTT}}
+    \label{fig:mqtt}
+\end{figure}
+
+Poruke koje izdavači objave se temelje na temama. Teme su strukturirane u hijerarhiju koja teme odvaja znakom "/" kao i kod datotečnih sustava. Primjer takve strukture je \textbf{"FER/zgrada-C/kat-7/soba-04/senzor/temperatura"} koja dozvoljava pretplatniku da navede kako želi primati samo informacije o temperaturi sobe četiri sedmog kata FER-ove C zgrade ili da se želi pretplatiti na sve senzore na FER-u koristeči sintaksu "FER/+/+/+/senzor/+". Kod objave prve poruke na temu koja ne postoji ta tema se automatski definira na posredniku bez prethodne konfiguracije.
+
+MQTT podržava 14 vrsta poruka od kojih su osam potvrde, a šest zahtijevi opisani u nastavku.
+\begin{description}
+    \item[PUBLISH:]izdavač šalje podatke teme na posrednika. Ako tema ne postoji, ona se stvara na posredniku. Ovisno o definiranoj razini kvalitete usluge posrednik šalje potvrdu o primitku poruke.
+    \item[SUBSCRIBE/UNSUBSCRIBE:]pretvara klijenta u pretplatnika na temu ili uklanja pretplatu na temu. Pretplate mogu biti vezane uz specifičnu temu, sve teme određene razine hijerarhije ili samo određene dijelove određenih razina hijerahije tema. Kao odgovor klijent dobiva potvrdu od posrednika.
+    \item[PING:] Klijent provjerava je li TCP konekcija prema posredniku još uvijek živa. Kao odgovor se dobiva potvrda ukoliko je posrednik dostupan i TCP konekcija živa.
+    \item[CONNECT/DISCONNECT:] Klijent šalje poruku posredniku za otvaranje ili zatvaranje konekcije. Kao odgovor se dobiva potvrda od posrednika o uspostavi konekcije, a kod zatvaranja konekcije se ne šalje potvrda.
+\end{description}
+
+Originalan cilj MQTT protokola je bilo smanjenje količine i efikasnost prijenosa podataka kako bi se mogla omogućiti komunikacija putem skupih i nepouzdanih komunikacijskih kanala poput satelitskog prijenosa. Tako kod razvoja protokola sigurnost nije bila primarna briga. Unatoč tome MQTT nudi nekoliko sigurnosnih mehanizama poput korištenje korisničkog imena i lozinke za autorizaciju klijenta kod posrednika. Nedostatak kod implementacije autorizacije je što se korisničko ime i lozinka prenose u nešifriranom tekstualnom formatu. Problem šifriranja i autentifikacije je riješeno korištenjem protokola TLS.
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 a
