@@ -472,14 +472,11 @@ a
 a
 
 \section{Mrežni sloj}
-Mrežni sloj u složaju Internet stvari omogućava prijenos informacija od prilaza do servisa koji se nalaze u vanjskoj mreži. Glavni način za komunikaciju između mreža je Internet protokol(IP). IP definira adresu uređaja kako bi paketi koji se šalju mogli biti usmjereni na taj uređaj. IP se dijeli na IPv4 i IPv6 protokole. Ta podjela postoji zbog ograničenosti IPv4 na 32 bitne adrese koje dozvoljavaju oko 4.2 bilijune ($2^{32}$) adresa od kojih su neke rezervirane za posebne potrebe. IPv4 je postao usko grlo na mrežnom sloju, posebice razvitkom Internet stvari te sve većem broju umreženih mobilnih uređaja. IPv6 donosi 128 bitne adrese koje dozvoljavaju oko $3.4*10^{38}$ adresa. Obje verzije protokola sadrže i proširenje pod nazivom IPSec \engl{Internet Protocol Security} koji vrši autentifikaciju i šifriranje paketa kako bi se osigurala komunikacija između dva računala preko različitih mreža. Glavna namjena ovog protokola je za uspostavu virtualnih privatnih mreža(VPN) te kao takav je rijetko u uporabi u Internet stvari sustavima već se autentifikacija i šifriranje podataka vrši na aplikacijskom sloju te ne će biti obrađen u sklopu ovog rada. U nastavku se detaljnije analiziraju i uspoređuju obje verzije Internet protokola.
+Mrežni sloj u složaju Internet stvari omogućava prijenos informacija od prilaza do servisa koji se nalaze u vanjskoj mreži. Glavni način za komunikaciju između mreža je Internet protokol(IP). 
 
 \subsection{Analiza protokola}
-\subsubsection{IPv4}
-IPv4 
-
-\subsubsection{IPv6}
-a
+\subsubsection{IP}
+IP definira adresu uređaja kako bi paketi koji se šalju mogli biti usmjereni na taj uređaj. IP se dijeli na IPv4 i IPv6 protokole. Ta podjela postoji zbog ograničenosti IPv4 na 32 bitne adrese koje dozvoljavaju oko 4.2 bilijune ($2^{32}$) adresa od kojih su neke rezervirane za posebne potrebe. IPv4 je postao usko grlo na mrežnom sloju, posebice razvitkom Internet stvari te sve većem broju umreženih mobilnih uređaja. IPv6 donosi 128 bitne adrese koje dozvoljavaju oko $3.4*10^{38}$ adresa. Obje verzije protokola sadrže i proširenje pod nazivom IPSec \engl{Internet Protocol Security} koji vrši autentifikaciju i šifriranje paketa kako bi se osigurala komunikacija između dva računala preko različitih mreža. Glavna namjena ovog protokola je za uspostavu virtualnih privatnih mreža(VPN) te kao takav je rijetko u uporabi u Internet stvari sustavima već se autentifikacija i šifriranje podataka vrši na aplikacijskom sloju te ne će biti obrađen u sklopu ovog rada. 
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 IP ne donosi nikakve sigurnosne mehanizme osim kontrolne sume kod IPv4. Razlog nepostojanja dodatnih mehanizama je postojanje podrške za šifriranjem na slojevima podatkovne poveznice i aplikacijskog sloja te postojanje kontrolne sume na tim slojevima uključujući i transportni sloj. Iako IPv4 sadrži kontrolnu sumu, ta opcija u zaglavlju je izostala iz IPv6 kako bi se smanjila potrebno vrijeme za procesiranjem s obzirom da protokoli viših i nižih slojeva već sadrže tu mogućnost. Nepostojanje sigurnosnih mehanizama kod ovih protokola je najizraženije u takozvanim \emph{IP spoofing} napadima. Taj napad se izvodi promjenom izvorišne adrese kako bi se najčešće izveo DDOS\engl{Distrubuted denial-of-service} napad. Napadač mijenja izvorišnu adresu u IP zaglavlju te radi veliki broj zahtijeva na različite servise s odredišnom adresom žrtve koja tada dobiva odgovor od svih servisa na koje su poslani zahtijevi kako bi zagušio i blokirao valjan promet. Obrana od takve vrste napada se najčešće provodi na usmjerivačima analizom prometa kako bi se utvrdili nevažeči paketi. 
@@ -502,13 +499,12 @@ Svojstva TCP-a omogućava pouzdani prijenos podataka između dvije krajnje točk
 Područja primjene UDP-a je u aplikacijama kojima je brzina prijenosa važnija od cijelovitosti i točnosti informacija poput video poziva, mrežnih igara i reprodukciji video snimaka. Područja primjene TCP-a je u aplikacijama gdje je pouzdanost informacija ključna poput bankovnih sustava, internet trgovini i elektroničkoj pošti.
 
 \section{Aplikacijski sloj}
-Aplikacijski sloj je zadnji sloj složaja Internet stvari preko kojeg se izvodi izravna komunikacija između aplikacija. Protokoli ovog sloja omogućuju postavljanje komunikacijskih pravila između aplikacija kako bi način razmijene podataka bio standardiziran. Aplikacijski sloj sadrži jako veliki broj protokola čija namjena je s obzirom na primjenu jako različita. U nastavku su analizirana i uspoređena četiri protokola aplikacijskog sloja koja su najviše zastupljena u Internet stvari.
+Aplikacijski sloj je zadnji sloj složaja Internet stvari preko kojeg se izvodi izravna komunikacija između aplikacija. Protokoli ovog sloja omogućuju postavljanje komunikacijskih pravila između aplikacija kako bi način razmijene podataka bio standardiziran. Aplikacijski sloj sadrži jako veliki broj protokola čija namjena je s obzirom na primjenu jako različita. U nastavku su analizirana i uspoređena tri protokola aplikacijskog sloja koja su najviše zastupljena u Internet stvari.
 
 \subsection{Analiza protokola}
 \subsubsection{HTTP}
 HTTP \engl{Hypertext Transfer Protocol} je protokol na aplikacijskom sloju za distribuirane, kolaborativne, hipermedijske sustave te koristi TCP kao bazu za komunikaciju između poslužitelja i klijenta. HTTP je u svom začetku bio osmišljen kao protokol za razmjenu hiperteksta, dok je danas zaslužan za razmjenu raznih hipermedijskih sadržaja, tj. teksta, slike, zvuka i videa te kao takav ima najveći udio prometa na Internetu među aplikacijskim protokolima. HTTP koristi URI \engl{Universal Resource Identifier} shemu za identificiranje resursa na mrežnoj lokaciji te koristi vrata 80 TCP-a. HTTP djeluje na temelju zahtijeva i odgovora gdje klijent zahtijeva resurs koristeći URI i definirane HTTP metode te na temelju zahtijeva dobiva odgovor od poslužitelja koji sadrži status odgovora, neobavezna polja zaglavlja te zahtijevani resurs u tijelu poruke ukoliko status odgovora poprima format 2XX. Zahtijevi osim tijela poruke također mogu sadržavati neobavezna polja zaglavlja koja daju više informacija vezana uz zahtijev poput zaglavlja koja imaju sigurnosne mehanizme: \emph{Content-MD5} polje koje služi za provjeru integriteta poruke korištenjem MD5 algoritma za izračunavanje kontrolne sume, \emph{Authorization} polje koje omogućuje autorizaciju korisnika na poslužitelju korištenjem korisničkog imena i lozinke kodirane \emph{Base64} kodnom stranicom ili neke druge vrste autorizacije. HTTP ima nekoliko verzija protokola od kojih su trenutno najzastupljenije HTTP/1.1 i HTTP/2 koje u suštini ne nude prevelike razlike osim veće brzine verzije dva zbog boljeg upravljanja zahtijevima, kompresijom zaglavlja i bolje upotrebe TCP konekcija. Trenutno je u razvoju treća verzija protokola koja kao protokol transportnog sloja koristi UDP i kao zadano donosi šifriranje podataka.
 
-\subsubsection{HTTP/S}
 HTTP/S \engl{Hypertext Transfer Protocol Secure} je nadogradnja HTTP-a uz korištenje kriptografskog protokola TLS \engl{Transport Layer Security} za šifriranje i autentifikaciju. HTTPS kao i HTTP koristi URI shemu za identificiranje resursa na mrežnoj lokaciji, a umjesto vrata 80 koristi vrata 443 TCP-a. TLS podržava razne kriptografske algoritme za šifriranje te digitalne certifikate za autentifikaciju. Verzija TLS-a koja se preporuča za korištenje je TLS 1.3 zbog pronađenih sigurnosnih propusta u prijašnjim verzijama. Postupak kojim se omogućava šifriranje i autentifikacija TLS-om se naziva rukovanje i dolazi nakon uspostava TCP konekcije te se izvodi u sljedećim koracima\cite{TLS}:
 \begin{enumerate}
     \item\textbf{"Client hello" poruka:} Klijent inicira rukovanje slanjem "hello" poruke poslužitelju. Poruka sadržava verzije TLS-a i kriptografske algoritme koje klijent podržava te slučajno generirani niz znakova.
@@ -530,7 +526,39 @@ Na sljedećoj slici je prikazan postupak TCP i TLS rukovanja potreban kako bi se
 \end{figure}
 
 \subsubsection{CoAP}
-CoAP \engl{Constrined Application Protocol} je specijalizirani 
+CoAP \engl{Constrined Application Protocol}\citep{COAP} je specijalizirani protokol za uređaje ograničenih resursa te kao protokol transportnog sloja koristi UDP na vratima 5683. Protokol je dizajniran za pouzdani prijenos podataka u okolinama male propusnosti i visoke razine zagušenja prometa upotrebom malih zaglavlja paketa i potrebi za maloj procesnoj snazi za obradu zahtijeva. CoAP kao i HTTP djeluje na temelju zahtijeva i dogovora između klijenta i poslužitelja, a koristi URI shemu za identificiranje resursa na mrežnoj lokaciji. Metode koje se koriste u zahtijevima su identične HTTP-u te se temelje na REST \engl{Representational State Transfer} arhitekturi. Metode zahtijeva su definirane kodnim brojem u zaglavlju poruke koje definira i kodni broj statusa odgovora. Kodni broj je veličine 8 bitova. Podržane metode su prikazane u tablici.
+\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
+\newcolumntype{R}{>{\centering\arraybackslash}m{3cm}}
+\begin{table}[h]
+    \centering
+    \caption{Podržane metode CoAP zahtijeva}
+    \begin{tabular}{| L | L | R |} 
+    \hline
+    \textbf{Metoda} & \textbf{Funkcionalnost} & \textbf{Svojstva}\\
+    \hline\hline
+    GET & dohvaća resurs na navedenom URI-u & sigurna, idempotentna \\
+    \hline
+    POST & stvara priloženi resurs na navedenom URI-u & nije sigurna ni idempotentna \\ 
+    \hline
+    PUT & ažurira ili stvara priloženi resurs na navedenom URI-u & nije sigurna, idempotentna \\ 
+    \hline
+    DELETE & briše resurs na navedenom URI-u & nije sigurna, idempotentna \\ 
+    \hline
+    \end{tabular}
+    \label{tab:coap}
+\end{table} 
+
+CoAP podržava četiri vrste poruka:
+\begin{description}
+    \item[CON(Confirmable Message):]Svaka poruka treba dobiti odgovor ACK ili RESET kao potvrdu.
+    \item[NON(Non-Confirmable Message):]Poruke ne trebaju dobiti potvrdu primitka.
+    \item[ACK(Acknowledgement Message):]Potvrda da je specifična CON poruka zaprimljena.
+    \item[RESET(Reset Message):]Potvrda da je specifična CON ili NON poruka zaprimljena, ali je kontekst poruke nedovoljan da bi se poruka obradila.
+\end{description}
+
+CoAP nudi mogućnost promatranja resursa temeljen na pretplati i objavi arhitekturi. Klijent registrira pretplatu na određeni resur korištenjem zaglavlja opcija u kojem postavlja opciju \emph{Observe:0}. Nakon toga se svakim ažuriranjem resursa šalje poruka na pretplačenog klijenta sve dok klijent ne otkaže pretplatu slanjem opcije \emph{Observe:1}.
+
+Kao što se HTTP osigurava upotrebom TLS-a preko TCP-a, tako CoAP koristi DTLS \engl{Datagram Transport Layer Security} za šifriranje i autentifikaciju. DTLS funkcionira na istom principu kao i TLS koji je objašnjen u HTTP odjeljku. CoAP s ukjučenim DTLS-om za razliku od HTTPS-a koristi UDP kao protokol transportnog sloja te koristi vrata 5684.
 
 \subsubsection{MQTT}
 MQTT \engl{Message Queuing Telemetry Transport} je lagani protokol temeljen na porukama, koristi TCP kao protokol transportnog sloja na vratima 1883 te se bazira na topologiji PUSH/SUBSCRIBE. Arhitektura MQTT protokola sadrži dvije vrste sudionika: klijente i posrednike \engl{broker}.Posrednik je poslužitelj s kojim klijenti komuniciraju putem poruka te posrednik prosljeđuje te poruke na ostale klijente. Na taj način klijenti ne komuniciraju s ostalim klijentima već putem posrednika. Svaki klijent može biti izdavač \engl{publisher}, pretplatnik \engl{subscriber} ili oboje. 
@@ -553,10 +581,12 @@ MQTT podržava 14 vrsta poruka od kojih su osam potvrde, a šest zahtijevi opisa
     \item[CONNECT/DISCONNECT:] Klijent šalje poruku posredniku za otvaranje ili zatvaranje konekcije. Kao odgovor se dobiva potvrda od posrednika o uspostavi konekcije, a kod zatvaranja konekcije se ne šalje potvrda.
 \end{description}
 
-Originalan cilj MQTT protokola je bilo smanjenje količine i efikasnost prijenosa podataka kako bi se mogla omogućiti komunikacija putem skupih i nepouzdanih komunikacijskih kanala poput satelitskog prijenosa. Tako kod razvoja protokola sigurnost nije bila primarna briga. Unatoč tome MQTT nudi nekoliko sigurnosnih mehanizama poput korištenje korisničkog imena i lozinke za autorizaciju klijenta kod posrednika. Nedostatak kod implementacije autorizacije je što se korisničko ime i lozinka prenose u nešifriranom tekstualnom formatu. Problem šifriranja i autentifikacije je riješeno korištenjem protokola TLS.
+Originalan cilj MQTT protokola je bilo smanjenje količine i efikasnost prijenosa podataka kako bi se mogla omogućiti komunikacija putem skupih i nepouzdanih komunikacijskih kanala poput satelitskog prijenosa. Tako kod razvoja protokola sigurnost nije bila primarna briga. Unatoč tome MQTT nudi nekoliko sigurnosnih mehanizama poput korištenje korisničkog imena i lozinke za autorizaciju klijenta kod posrednika. Nedostatak kod implementacije autorizacije je što se korisničko ime i lozinka prenose u nešifriranom tekstualnom formatu. Problem šifriranja i autentifikacije je riješeno korištenjem protokola TLS te se tada protokolu pristupa putem TCP vrata 8883. 
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
-a
+Sva tri navedena protokola nemaju vlastite mehanizme koji bi omogučavali šifriranje podataka i autentifikaciju te za to koriste protokol TLS kao nadogradnju. HTTP i MQTT koriste TLS s TCP-om kao protokol transportnog sloja dok CoAP koristi DTLS koji koristi UDP za protokol transportnog sloja. TLS i DTLS su funkcijski identični protokoli s jedinom razlikom u korištenom transportnog protokolu. HTTP i MQTT također imaju neobaveznu podršku za autorizacijom klijenta korištenjem korisničkog imena i lozinke.
+
+HTTP je u svojoj primjeni puno fleksibilniji zbog mogućnosti prijenosa bilo koje vrste podataka koji uključuju hipertekstualne datoteke, slike, video i audio zapisa te kao takav je najzastupljeniji protokol aplikacijskog sloja na Internetu. Za razliku su MQTT i CoAP protokoli dizajnirani kao lagani protokoli za uređaje i mreže ograničenih resursa. Tako je glavna namjena tih protokola kod praćenja očitanja i jednostavnih događaja pretežito prisutnih u Internet stvarima.
 
 \chapter{Sustav za praćenje tjelesne temperature}
 
