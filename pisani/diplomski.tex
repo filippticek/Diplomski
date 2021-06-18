@@ -430,15 +430,42 @@ Sloj podatkovne poveznice u složaju Interneta stvari sadržava fizički sloj i 
 a
 
 \subsubsection{BLE}
-a
+BLE \engl{Bluetooth Low Energy} je bežični protokol male snage te je jedan od dva protokola pod Bluetooth nazivom. Drugi protokol je Bluetooth Classic koji se koristi za kontinuiranu komunikaciju velikog skupa podataka na maloj udaljenosti te kao takav je korišten u Internetu stvari, ali za potrebe stacionarnih uređaja sa stalnim izvorom napajanja koji kontinuirano šalju podatke. BLE koristi periodični prijenos manjih podatkovnih paketa te u trenucima kada ne sudjeluje u razmjeni podataka je u stanju mirovanja što uvelike dopinosi smanjenju potrošnje energije. Na taj način se omogućuje razvoj manjih mobilnih uređaja koji mogu biti pokretani duže vrijeme na maloj bateriji. 
 
-\subsubsection{NFC}
-a
+Na fizičkom sloju BLE koristi ISM \engl{Industrial, Scientific, and Medical} radiofrekvencijski pojas na frekvenciji od 2.4GHz. Brzina podatkovnog prijenosa je 1Mbps za verzije 4.2 ili starije, a za verzije 5 i novije može postići do 2Mbps. Udaljenost na kojoj uređaji mogu komunicirati ovisi o preprekama koje se nalaze, vrsti antene, kučištu i orijentaciji uređaja, ali teoretska maksimalna udaljenost je između 100 i 400 metara.
+
+Topologija BLE mreže podrazumijeva dvije vrste uređaja:
+\begin{description}
+    \item[Centralni uređaji:]imaju veću procesnu snagu i odgovorni su za kontroliranje perifernih uređaja. Na njima se izvode aplikacije posebno izrađene za interakciju s perifernim uređajima. Neki od primjera centralnih uređaja su: pametni telefoni, tableti i računala. 
+    \item[Periferni uređaji:]mala integrirana računala koja obnašaju zadaću opažanja koristeći senzore te prikupljene podatke šalju na centralne uređaje za obradu. Neki od primjera perifernih uređaja su: pametni satovi, nosivi medicinski uređaji i industrijski termostati.
+\end{description}
+
+Kako bi se mogla odvijati komunikacija između centralnih i perifernih uređaja prvo je potrebno uspostaviti konekciju postupkom koji se naziva uparivanje \engl{pairing}. Uparivanje se odvija u dvije ili tri faze, tijekom koji uređaji izmjenjuju podatke potrebne za autentifikaciju, poput ključeva i ulazno/izlaznih sposobnosti. Treća faza je neobavezna te se dešava u slučaju da će uređaji uspostaviti vezu \engl{bond}. Vezivanje \engl{bonding} je proces u kojem uređaji spremaju autentifikacijske podatke koje su izmjenili tijekom prvobitnog uparivanja kako bi se uklonila potreba za ponovnim uparivanje tijekom ponovne uspostave komunikacije. Tijekom prve faze uređaji razmjenjuju informacije o identitetu i sposobnostima uređaja i komunikacija nije šifrirana. Druga faza je posvećena generiranje i izmjeni ključeva te je tijekom ove faze moguć napad \emph{man-in-the-middle} napad gdje napadač može preuzeti kontrolu nad uređajem i podacima koje se prenose. Kod treće faze uparivanja uređaji generiraju set ključeva za autentifikaciju kod budućih uspostava veza. Ti ključevi mogu biti par potpisnih ključeva za razlučivanje konekcije \engl{Connection Signature Resolving Keys}, koji se koriste za digitalni potpis podataka, te ključevi za razlučivanje identiteta \engl{Identity Resolving Keys}, koji se koriste za generiranje privatnih MAC adresa i pretraživanje. Prikaz postupka uparivanja je prikazan na sljedećoj slici.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=13cm]{images/ble.png}
+    \caption{Uparivanje uređaja BLE protokolom\citep{Kacherovska2019Aug}}
+    \label{fig:ble}
+\end{figure}
+
+BLE podržava dvije vrste konekcija \emph{Legacy} i \emph{Secure}. Legacy konekcije mogu biti implementirane za verzije 4.0, 4.1 i 4.2. Uređaji razmjenjuju vrijednost privremenog ključa \engl{Temporary Key} i koriste tu vrijednost kako bi generirali kratkoročni ključ \engl{Short Term Key} koji se zatim koristi za autorizaciju konekcije. BLE Legacy konekcije su nesigurne, ali mogu biti osigurane s određenim metodama uparivanja. Secure konekcije su predstavljane s verzijom 4.2 i nisu kompatibilne sa starijim verzijama protokola. Ove konekcije implementiraju algoritam eliptičke krivulje Diffie-Hellman (ECDH) za generiranje ključeva i donose kompleksniji proces autentifikacije ključima. Na taj način se spriječava napad prisluškivanjem i uređaji mogu biti dodatno osigurani sa određenim metodama uparivanja opisanim u nastavku.
+
+\emph{Just Works} metoda uparivanja je zadana metoda za većinu BLE mreža. Kod Legacy konekcija vrijednost privremeng ključa tijekom druge faze uparivanja je postavljena na 0 i uređaji generiraju kratkoročni ključ na temelju te vrijednosti. Takva vrsta sprivanja je jako nesigurna i ne nudi nikakvu vrstu zaštite, već samo način za uspostavu veze. Ova vrsta uparivanja može biti kompleksna i pouzdana za osnovnu sigurnost konekcije kroz sljedeće korake:
+\begin{enumerate}
+    \item Korištenjem ECDH kriptografskog algoritma, oba uređaja generiraju privatni i javni par ključeva i izmjenjuju javni ključ.
+    \item Uređaj koji prima zahtijev za konekcijom generira nasumičnu vrijednost i koristi tu vrijednost kako bi generirao potvrdnu vrijednost. Uređaj šalje obje vrijednosti uređaju koji je inicirao konekciju.
+    \item Uređaj koji inicira konekciju generira vlastitu potvrdnu vrijednost s nasumičnom vrijednosti koju je primio od drugog uređaja. Uspoređuje vlastitu potvrdnu vrijednost s potvrdnom vrijednosti koju je dobio od drugog uređaja.
+    \item Ako su vrijednosti identične, uređaji uspostavljaju vezu.
+\end{enumerate}
+Ova metoda nudi zaštitu od pasivnog prisluškivanja, ali ne i od \emph{man-in-the-middle} napada te se ne preporuča za primjene gdje se razmjenjuju osjetljivi podaci. 
+
+\emph{Out of Band} metoda uparivanja dozvoljava da se određeni podaci tijekom druge faze uparivanja šalju putem nekog drugog bežičnog protokola kako se ključevi ne bi razmijenjivali putem manje sigurnog BLE protokola ili kada uređaji razmjenjuju osjetljive podatke. Krajanja sigurnost ove metode ovisi o protokolu koji se koristi te se na taj način može spriječiti napadi pasivnim prisluškivanjem i \emph{man-in-the-middle} napadi.
+
+\emph{Passkey} metoda uparivanja koristi korisnike kao dio procesa. Postoje različiti načini implementacije ove metode. Jedan od primjera je da uređaj generira lozinku od šest znamenki, koju tada korisnik treba unijeti na drugom uređaju. Na ovaj način se svaki uređaj ručno verificira od strane korisnika što zahtijeva da uređaji imaju neki oblik unošenja i prikazivanja podataka. Ovim načinom se spriječavaju napadi pasivnim prislušikavnjem i \emph{man-in-the-middle} napadi.
+
+Metoda uparivanja numeričkom usporedbom je dostupna samo za Secure konekcije te također zahtijeva sudjelovanje korisnika. Nakon druge faze uparivanja uređaji koriste nasumične vrijednosti koje su prije razmjenili kako bi generirali šesteroznamenskastu vrijednost koju korisnik treba usporediti na oba uređaja. Ova metoda nudi zađtitu od \emph{man-in-the-middle} napada jer nijedan uređaj se ne može povezati na mrežu bez ručne verifikacije\citep{Kacherovska2019Aug}.
 
 \subsubsection{ZigBee}
-a
-
-\subsubsection{SigFox}
 a
 
 \subsubsection{LoRa}
@@ -593,7 +620,7 @@ Sažetak na hrvatskom jeziku.
 \kljucnerijeci{Ključne riječi, odvojene zarezima.}
 \end{sazetak}
 
-\engtitle{Analysis and comparison of security mechanisms in the Internet of Things}
+\engtitle{Analysis and comparison of IoT security mechanisms}
 \begin{abstract}
 Abstract.
 
