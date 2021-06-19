@@ -422,15 +422,15 @@ Kako bi komunikacija pristupnih uređaja prema vanjskim poslužiteljima bila sig
 
 Primjena svih navedenih uređaja ovisi o njihovim izvorima napajanja, veličini, podršci za komunikacijske module i procesorskoj snazi. Ako gledamo procesorsku snagu i izvor napajanja tu dolazimo do pitanja energetske učinkovitosti uređaja koja ograničava mogućnost upotrebe baterija kao izvora napajanja. Tako će se Raspberry Pi 4 Model B koristiti kao stacionaran pametan uređaj s vanjskim napajanjem, dok ostali navedeni uređaji imaju mogućnost biti baterijski napajani što dozvoljava mobilnu primjenu. Zbog svoje velike procesorske snage Raspberry Pi 4 Model B može djelovati kao poslužitelj i prilaz za ostale pametne uređaje dok su ostali uređaji većinom ograničeni na jednostavne senzorske i aktuatorske primjene. Svi navedeni uređaji imaju podršku za vanjske komunikacijske module te nisu ograničeni na tom području iako neki od uređaja dolaze s već integriranim modulima što dozvoljava brz, jednostavan i jeftin razvoj.
 
-\section{Sloj podatkovne poveznice}
-Sloj podatkovne poveznice u složaju Interneta stvari sadržava fizički sloj i sloj podatkovne poveznice modela OSI \engl{Open Systems Interconnection model} složaja. Kod fizičkog sloja govorimo o fizičkom mediju kojem se prenose podaci. Postoje dvije vrste kategorije medija, žičani i bežični na kojima se zatim temelje protokoli podatkovne poveznice. Uloga protokola sloja podatkovne poveznice je da definiraju fizički medij koji se koristi u komunikaciji, svojstva tog medija poput frekvencije koja će se koristiti u radiovalnoj komunikaciji, linijske kodove, strukturu paketa, automate stanja, adresiranje, sinkronizaciju, kontrolu protoka i korekciju grešaka. Na ovom sloju se nalazi velika heterogenost protokola zbog različitih potreba u sustavima Interneta stvari. Heterogenost protokola je najizraženija u bežičnoj komunikaciji zbog različitih potreba u dometu komunikacije, brzini prijenosa informacija, latenciji i mobilnosti uređaja. Sve ove potrebe su posebno izražene jer upotrebom bežične komunikacije proširujemo mogućnosti primjena uređaja, dok žičane komunikacije uglavnom ograničavamo za potrebe komunikacije prilaza i vanjskih servisa zbog stabilne i brze komunikacije. U nastavku se analiziraju i uspoređuju samo neki od protokola podatkovne poveznice temeljenih na bežičnim tehnologijama.
+\section{Fizički sloj i sloj podatkovne poveznice}
+ Fizičkog sloj se definira fizičkim medijem kojem se prenose podaci. Postoje dvije vrste kategorije medija, žičani i bežični na kojima se zatim temelje protokoli podatkovne poveznice. Uloga fizičkog sloja je da definiraju fizički medij koji se koristi u komunikaciji, svojstva tog medija poput frekvencije koja će se koristiti u radiovalnoj komunikaciji, sinkronizaciju, pakete i linijske kodove dok sloj podatkovne poveznice definira strukturu paketa, automate stanja, adresiranje, sinkronizaciju, kontrolu protoka i korekciju grešaka. Na ovim slojevima se nalazi velika heterogenost protokola zbog različitih potreba u sustavima Interneta stvari. Heterogenost protokola je najizraženija u bežičnoj komunikaciji zbog različitih potreba u dometu komunikacije, brzini prijenosa informacija, latenciji i mobilnosti uređaja. Sve ove potrebe su posebno izražene jer upotrebom bežične komunikacije proširujemo mogućnosti primjena uređaja, dok žičane komunikacije uglavnom ograničavamo za potrebe komunikacije prilaza i vanjskih servisa zbog stabilne i brze komunikacije. U nastavku se analiziraju i uspoređuju samo neki od protokola fizičkog sloja i sloja podatkovne poveznice temeljenih na bežičnim tehnologijama.
 
 \subsection{Analiza protokola}
-\subsubsection{WiFi}
+\subsubsection{IEEE 802.11 WiFi}
 a
 
-\subsubsection{BLE}
-BLE \engl{Bluetooth Low Energy} je bežični protokol male snage te je jedan od dva protokola pod Bluetooth nazivom. Drugi protokol je Bluetooth Classic koji se koristi za kontinuiranu komunikaciju velikog skupa podataka na maloj udaljenosti te kao takav je korišten u Internetu stvari, ali za potrebe stacionarnih uređaja sa stalnim izvorom napajanja koji kontinuirano šalju podatke. BLE koristi periodični prijenos manjih podatkovnih paketa te u trenucima kada ne sudjeluje u razmjeni podataka je u stanju mirovanja što uvelike dopinosi smanjenju potrošnje energije. Na taj način se omogućuje razvoj manjih mobilnih uređaja koji mogu biti pokretani duže vrijeme na maloj bateriji. 
+\subsubsection{Bluetooth Low Energy}
+\emph{Bluetooth Low Energy} (BLE) je bežični protokol male snage te je jedan od dva protokola pod Bluetooth nazivom. Drugi protokol je Bluetooth Classic koji se koristi za kontinuiranu komunikaciju velikog skupa podataka na maloj udaljenosti te kao takav je korišten u Internetu stvari, ali za potrebe stacionarnih uređaja sa stalnim izvorom napajanja koji kontinuirano šalju podatke. BLE koristi periodični prijenos manjih podatkovnih paketa te u trenucima kada ne sudjeluje u razmjeni podataka je u stanju mirovanja što uvelike dopinosi smanjenju potrošnje energije. Na taj način se omogućuje razvoj manjih mobilnih uređaja koji mogu biti pokretani duže vrijeme na maloj bateriji. 
 
 Na fizičkom sloju BLE koristi ISM \engl{Industrial, Scientific, and Medical} radiofrekvencijski pojas na frekvenciji od 2.4GHz. Brzina podatkovnog prijenosa je 1Mbps za verzije 4.2 ili starije, a za verzije 5 i novije može postići do 2Mbps. Udaljenost na kojoj uređaji mogu komunicirati ovisi o preprekama koje se nalaze, vrsti antene, kučištu i orijentaciji uređaja, ali teoretska maksimalna udaljenost je između 100 i 400 metara.
 
@@ -440,7 +440,7 @@ Topologija BLE mreže podrazumijeva dvije vrste uređaja:
     \item[Periferni uređaji:]mala integrirana računala koja obnašaju zadaću opažanja koristeći senzore te prikupljene podatke šalju na centralne uređaje za obradu. Neki od primjera perifernih uređaja su: pametni satovi, nosivi medicinski uređaji i industrijski termostati.
 \end{description}
 
-Kako bi se mogla odvijati komunikacija između centralnih i perifernih uređaja prvo je potrebno uspostaviti konekciju postupkom koji se naziva uparivanje \engl{pairing}. Uparivanje se odvija u dvije ili tri faze, tijekom koji uređaji izmjenjuju podatke potrebne za autentifikaciju, poput ključeva i ulazno/izlaznih sposobnosti. Treća faza je neobavezna te se dešava u slučaju da će uređaji uspostaviti vezu \engl{bond}. Vezivanje \engl{bonding} je proces u kojem uređaji spremaju autentifikacijske podatke koje su izmjenili tijekom prvobitnog uparivanja kako bi se uklonila potreba za ponovnim uparivanje tijekom ponovne uspostave komunikacije. Tijekom prve faze uređaji razmjenjuju informacije o identitetu i sposobnostima uređaja i komunikacija nije šifrirana. Druga faza je posvećena generiranje i izmjeni ključeva te je tijekom ove faze moguć napad \emph{man-in-the-middle} napad gdje napadač može preuzeti kontrolu nad uređajem i podacima koje se prenose. Kod treće faze uparivanja uređaji generiraju set ključeva za autentifikaciju kod budućih uspostava veza. Ti ključevi mogu biti par potpisnih ključeva za razlučivanje konekcije \engl{Connection Signature Resolving Keys}, koji se koriste za digitalni potpis podataka, te ključevi za razlučivanje identiteta \engl{Identity Resolving Keys}, koji se koriste za generiranje privatnih MAC adresa i pretraživanje. Prikaz postupka uparivanja je prikazan na sljedećoj slici.
+Kako bi se mogla odvijati komunikacija između centralnih i perifernih uređaja prvo je potrebno uspostaviti konekciju postupkom koji se naziva uparivanje \engl{pairing}. Uparivanje se odvija u dvije ili tri faze, tijekom koji uređaji izmjenjuju podatke potrebne za autentifikaciju, poput ključeva i ulazno/izlaznih sposobnosti. Treća faza je neobavezna te se dešava u slučaju da će uređaji uspostaviti vezu \engl{bond}. Vezivanje \engl{bonding} je proces u kojem uređaji spremaju autentifikacijske podatke koje su izmjenili tijekom prvobitnog uparivanja kako bi se uklonila potreba za ponovnim uparivanje tijekom ponovne uspostave komunikacije. Tijekom prve faze uređaji razmjenjuju informacije o identitetu i sposobnostima uređaja i komunikacija nije šifrirana. Druga faza je posvećena generiranje i izmjeni ključeva te je tijekom ove faze moguć napad \emph{man-in-the-middle} napad gdje napadač može preuzeti kontrolu nad uređajem i podacima koje se prenose. Kod treće faze uparivanja uređaji generiraju set ključeva za autentifikaciju kod budućih uspostava veza. Ti ključevi mogu biti par potpisnih ključeva za razlučivanje konekcije \engl{Connection Signature Resolving Keys}, koji se koriste za digitalni potpis podataka, te ključevi za razlučivanje identiteta \engl{Identity Resolving Keys}, koji se koriste za generiranje privatnih MAC adresa i pretraživanje. Kriptografski algoritam koji se koristi za šifriranje prometa je AES \engl{Advanced Encryption Standard} s 128 bitnim ključem izveden tijekom postupka uparivanja. Prikaz postupka uparivanja je prikazan na sljedećoj slici.
 \begin{figure}[H]
     \centering
     \includegraphics[width=13cm]{images/ble.png}
@@ -465,11 +465,75 @@ Ova metoda nudi zaštitu od pasivnog prisluškivanja, ali ne i od \emph{man-in-t
 
 Metoda uparivanja numeričkom usporedbom je dostupna samo za Secure konekcije te također zahtijeva sudjelovanje korisnika. Nakon druge faze uparivanja uređaji koriste nasumične vrijednosti koje su prije razmjenili kako bi generirali šesteroznamenskastu vrijednost koju korisnik treba usporediti na oba uređaja. Ova metoda nudi zađtitu od \emph{man-in-the-middle} napada jer nijedan uređaj se ne može povezati na mrežu bez ručne verifikacije\citep{Kacherovska2019Aug}.
 
-\subsubsection{ZigBee}
-a
+\subsubsection{IEEE 802.15.4}
+IEEE 802.15.4 je standard koji specificira bežične tehnologije prijenosa podataka za uređaje i mreže ograničenih mogućnosti s fokusom na nisku potrošnju energije. Standard specificira fizički sloj i sloj za kontrolu pristupa sredstvu \engl{Medium Access Control}. 
 
-\subsubsection{LoRa}
-a
+\subsubsection{LoRaWAN}
+LoRaWAN \engl{Long Range Wide Area Network} je standard za bežičnu komunikaciju koji dovoljava komunikaciju uređaja Interneta stvari preko velikih udaljenosti s minimalnom energetskom potrošnjom. LoRa i LoRaWAN su pojmovi koji se koriste naizmjenično iako definiraju različite slojeve Internet stvari složaja. LoRa definira fizički sloj dok LoRaWAN definira protokol i arhitekturu sustava. LoRa definira različite radiofrekvencijske pojase koji pripadaju ISM pojasevima. U Europi LoRa koristi frekvenicije na pojasu oko 869MHz, dok u Sjevernoj Americi koristi 923MHz čime se javlja nekompatibilnost uređaja prozivedenih za ta dva tržišta. Domet komunikacije ovisi o monogo parametara poput naseljenosti područja u kojem se odvija komunikacija. Za urbana područja domet je oko 5km, predgrađa 10km, a u nenaseljenim područjima može dostići i do 80km.
+LoRaWAN arhitektura se sastoji od: krajnjih čvorova (uređaja), LoRa prilaza, mrežnog poslužitelja i krajnjih aplikacija. Prikaz topologije LoRaWAN arhitekture je na sljedećoj slici.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=13cm]{images/lorawan.png}
+    \caption{Topologija LoRaWAN arhitekture\citep{LoraWANImg}}
+    \label{fig:lorawan}
+\end{figure}
+
+Krajnji čvorovi mogu biti senzori ili aktuatori, često su napajani baterijama i imaju visoku razinu energetske učinkovitosti te tako mogu dugo funkcionirati na jednom punjenju. Postoje 3 kategorije čvorova. Klasa A je najučinkovitija te može primati poruke samo nakon uspješnog slanja poruke s uređaja. Klasa B nadograđuje klasu A i dodaje mogućnost primanja poruka u predodređenim intervalima. Klasa C može primati podatke samo kada ih ne šalje. Uređaji na mreži koriste sljedeće vrste adresa i identifikatora:
+\begin{description}
+    \item[DevEUI:]Jedinstveni identifikator formata EUI64 \engl{Extended Unique Identifier} adrese veličine 64 bita. Usporedivo s MAC adresama za TCP/IP uređaje.
+    \item[DevAddr:]Adresa uređaja veličine 32 bita dodjeljena ili odabrana na mreži. Usporedivo s IP adresama za TCP/IP uređaje.
+    \item[AppEUI:]Aplikacijski identifikator formata EUI64 adrese. Jedinstveno identificira aplikacijskog davatelja usluga uređaja. AppEUI se sprema na krajnji čvor prije nego se izvodi aktivacijski postupak za verzije prije 1.1.
+    \item[JoinEUI:]Identifikator pristupnog poslužitelja formata EUI64 adrese. Jedinstveno identificira pristupnog poslužitelja. JoinEUI se sprema na krajnji čvor prije nego se izvodi aktivacijski postupak za verziju 1.1.
+    \item[Fport:]Identificira vrata aplikacijskog procesa. Usporedivo sa TCP/UDP vratima za TCP/IP uređaje.
+\end{description}
+
+LoRa prilazi primaju LoRa poruke od krajnjih uređaja te samo prosljeđuju te podatke na mrežne poslužitelje. Prilazi su povezani na Internet putem drugih protokola poput WiFi-a, Etherneta ili mobilnih mreža.
+
+Mrežni poslužitelji upravljaju cijelom LoRaWAN mrežom. Zadaće poslužitelja su:
+\begin{itemize}
+    \item agregiranje svih dolaznih podataka s LoRa prilaza,
+    \item usmjeravanje poruka na aplikacijske poslužitelje,
+    \item konfiguraciju prilaza,
+    \item optimiziranje brzine prijenosa podataka, vremena emitiranja i potrošnje energije na mreži,
+    \item aktivaciju krajnjih uređaja,
+    \item slanje potvrda o primljenim porukama.
+\end{itemize}
+
+Pristupni poslužitelj obrađuju pristupne zahtjeve krajnjih uređaja. Poslužitelj obavlja funkcije spremanja root kriptografskih ključeva, generira ključeve sjednice i prijenosi ključeve sjednice mrežnim i aplikacijskim poslužiteljima. Pristupni poslužitelj je uveden u LoRaWAN mrežu od verzije 1.0.4 i 1.1.
+
+LoRaWAN 1.1 nudi nekoliko razina sigurnosti. Mrežni poslužitelj ne treba imati informaciju o sadržaju poruke koja se usmjeruje, a da nije relevantna za mrežu ili infrastrukturu. Zato postoje dva različita kriptografska 128 bitna ključa koji koriste AES alogritam za šifriranje i 2 ključa za provjeru integriteta poruka kod uređaja kako bi se postigla zaštita podataka na dvije razine. Ključevi korišteni nakon povezivanja uređaja na mrežu su sljedeći:
+\begin{description}
+    \item[SNwkSIntKey:]Ovo je ključ mrežne sjednice koji koristi uređaj za potvrdu integriteta svake primljene poruke putem \emph{Message Interity Code} (MIC) provjere i za izračun MIC-a za pola odlazne poruke.
+    \item[FNwkSIntKey:]Ovo je ključ mrežne sjednice koji koristi uređaj za izračun MIC-a cijelog ili dijela odlazne poruke.
+    \item[NwkSEncKey:]Ovo je ključ mrežne sjednice koji koristi uređaj za šifriranje i dešifriranje dolaznih i odlaznih poruka MAC naredbi.
+    \item[AppSKey:]Ovo je ključ aplikacijske sjednice koji koriste aplikacija i uređaj za šifriranje i dešifriranje poruka koje izmjenjuju.
+\end{description}
+Mrežni ključ sjednice (NwkSEncKey) se koristi za komunikaciju između krajnjeg čvora i mrežnog poslužitelja. Ključ potvrđuje integritet svake poruke putem \emph{Message Interity Code} (MIC) provjere. Ta provjera je slična provjeri koristeći kontrolnu sumu uz razliku da onemogućuje neautorizirane promjene sadržaja poruke. Ova provjera se također koristi za mapiranje DevAddr na jedinstvene DevEUI i AppEUI. NwkSEncKey se nakon aktivacije čvora dijeli s mrežom.
+
+Aplikacijski ključ sjednice (AppSKey) se koristi za šifriranje i dešifriranje sadržaja poruka. Sadržaj poruke je šifriran cijelim putem između čvora i aplikacijskog poslužitelja. Ovaj ključ se generira kao i NwkSkey nakon aktivacije čvora, ali samo čvor i aplikacijski poslužitelj imaju taj ključ, što omogučava potpunu tajnost podataka dok ne stigne do aplikacije.
+
+Za aktivaciju čvora i pristupanje mreži kako bi se mogla odvijati komunikacija i kako bi se stvorili kriptografski ključevi se može odviti s dva različita postupka: ABP \engl{Activation By Personalization} i OTAA \engl{Over The Air Activation}.
+
+ABP je najednostavniji način za aktivaciju i pristup LoRa uređaja na mrežu. Dobavljač uređaja od davatelja mrežne usluge otkupi određeni raspon DevAddr adresa i opskrbi svoje uređaje s tim adresama. Nakon što se uređaj upali odmah je spreman za komunikaciju s prilazima. Koraci u postupku aktivacije su:
+\begin{enumerate}
+    \item Dobavljač uređaja otkupi mogućnost povezivanja od davatelja mrežnih usluga. AppSKey je generiran unaprijed.
+    \item Davatelj mrežnih uređaja dostavlja NwkSkey i DevAddr za svaki DevEUI.
+    \item Prije uporabe uređaja se opskrbljuje uređaje s: NwkSkey, AppSKey i DevAddr
+    \item Kod prvog korištenja uređaja, nema nikakvog koraka za aktivacijom i pristupa uređaja mreži jer uređaji već mogu komunicirati s mrežom jer imaju sve potrebne informacije.
+\end{enumerate}
+
+OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo kojoj mreži u blizini i ne zahtijeva poseban dogov između dobavljača uređaja i davatelja mrežnih usluga. Postupak je različit za verziju 1.1 i ranije verzije, a ovdje ćemo gledati postupak aktivacije za verziju 1.1. Kako bi se sigurnim putem dobavili potrebni ključevi i adresa uređaja postupak koristi dva dodatna kriptografska ključa naziva AppKey i NwkKey koji uz DevEUI trebaju biti spremljeni na uređaju prije postupka aktivacije. To su kriptografski ključevi od 128 bita korišteni za AES kriptografski algoritam. Na pristupnom poslužitelju su spremljeni AppKey, NwkKey i DevEUI. Koraci u postupku aktivacije su:
+\begin{enumerate}
+    \item LoRa uređaj šalje Join-request zahtjev potpisan s NwkKey. Zahtjev za pristup mreži sadrži JoinEUI, DevEUI i DevNonce. DevNonce je dvobitni brojač koji počinje s vrijednošću 0 i inkrementira se sa svakim Join-request zahtjevom, a koristi se za sprječavanje napada ponavljanjem. Ovaj zahtijev nije šifriran. Zahtjev LoRa prilazi prosljeđuju na mrežni poslužitelj.
+    \item Mrežni poslužitelj koristi DNS kako bi doznao IP adresu pristupnog poslužitelja iz JoinEUI polja.
+    \item Mrežni poslužitelj šalje JoinReq zahtjev na pristupni poslužitelj. Zahtjev sadrži Join-request zahtjev, MAC verziju, DevAddr i druge servisne informacije.
+    \item Pristupni poslužitelj obrađuje Join-request zahtjev i šalje JoinAns poruku mrežnom poslužitelju. Poruka sadrži Join-accept poruku, NwkSkey, \emph{Serving Network session integrity key} (SNwkSIntKey), \emph{Forwarding Network session integrity key} (FNwkSIntKey), \emph{Network session encryption key} (NwkSEncKey) i šifrirani AppSKey.
+    \item Mrežni poslužitelj prosljeđuje primljenu Join-accept poruku krajnjem uređaju. Uređaj izračunava MIC i generira mrežne ključeve sesije i AppSKey. FNwkSIntKey, SNwkSIntKey i NwkSEncKey se izvode iz NwkKey.
+    \item Mrežni poslužitelj prima odgovor od uređaja te šalje DevEUI i šifriran AppSKey zajedno s porukom aplikacijskom poslužitelju. 
+    \item Aplikacijski poslužitelj prima šifriran AppSKey zajedno s porukom i dešifrira AppSKey koristeći tajni ključ izmjenjen između pristupnog i aplikacijskog poslužitelja. Tada koristi AppSKey za dešifriranje poruke. Ako šifrirani AppSKey nije primljen tada se dovija još jedan korak.
+    \item Aplikacijski poslužitelj zahtjeva AppSKey izravno od pristupnog poslužitelja slanjem AppSKeyReq zahjeva koji sadrži DevEUI uređaja. AppSKey je šifriran koristeći zajedničku tajnu pristupnog i mrežnog poslužitelja. Pristupni poslužitelj šalje šifrirani AppSKey i DevEUI aplikacijskom poslužitelju u AppSKeyAns poruci. Aplikacijski poslužitelj dešifrira AppSKey i pomoću njega dešifrira poruku uređaja.
+    \item Nakon aktivacije uređaj ima spremljen DevAddr, FNwkSIntKey, SNwkSIntKey, NwkSEncKey i AppSKey\citep{LoraWANAct}.
+\end{enumerate}
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 a
