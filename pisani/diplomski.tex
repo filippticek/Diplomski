@@ -10,6 +10,10 @@
 \setcounter{secnumdepth}{3}
 \setcitestyle{numbers}
 \graphicspath{ {./images/} }
+\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
+\newcolumntype{M}{>{\centering\arraybackslash}m{3cm}}
+\newcolumntype{X}{>{\centering\arraybackslash}m{2.4cm}}
+\newcolumntype{S}{>{\centering\arraybackslash}m{2cm}}
 
 \begin{document}
 
@@ -426,8 +430,73 @@ Primjena svih navedenih uređaja ovisi o njihovim izvorima napajanja, veličini,
  Fizičkog sloj se definira fizičkim medijem kojem se prenose podaci. Postoje dvije vrste kategorije medija, žičani i bežični na kojima se zatim temelje protokoli podatkovne poveznice. Uloga fizičkog sloja je da definiraju fizički medij koji se koristi u komunikaciji, svojstva tog medija poput frekvencije koja će se koristiti u radiovalnoj komunikaciji, sinkronizaciju, pakete i linijske kodove dok sloj podatkovne poveznice definira strukturu paketa, automate stanja, adresiranje, sinkronizaciju, kontrolu protoka i korekciju grešaka. Na ovim slojevima se nalazi velika heterogenost protokola zbog različitih potreba u sustavima Interneta stvari. Heterogenost protokola je najizraženija u bežičnoj komunikaciji zbog različitih potreba u dometu komunikacije, brzini prijenosa informacija, latenciji i mobilnosti uređaja. Sve ove potrebe su posebno izražene jer upotrebom bežične komunikacije proširujemo mogućnosti primjena uređaja, dok žičane komunikacije uglavnom ograničavamo za potrebe komunikacije prilaza i vanjskih servisa zbog stabilne i brze komunikacije. U nastavku se analiziraju i uspoređuju samo neki od protokola fizičkog sloja i sloja podatkovne poveznice temeljenih na bežičnim tehnologijama.
 
 \subsection{Analiza protokola}
-\subsubsection{IEEE 802.11 WiFi}
-a
+\subsubsection{IEEE 802.11 Wi-Fi}
+IEEE 802.11 Wi-Fi je porodica bežičnih komunikacijskih protokola temeljenih na radiofrekvencijskom prijenosu. Varijante protokola WiFi su jedani od najbolje zastupljenih komunikacijskih protokola zbog svoje pojave na tržištu zajedno s uređajima kojima je cilj bio mobilna uporaba poput prijenosnih računala i mobilnih telefona. Kroz godine se počela pojavljivati potreba za bržim prijenosom podataka, manjom latencijom i mogućnošću povezivanja više uređaja na jednu baznu stanicu \engl{access point} što je dovelo i do razvoja različitih standarda koji svi čine jednu porodicu protokola. U tablici su prikazani različiti standardi te frekvencije koje koriste i maksimalna propusnost koja se može postići.
+\begin{table}[H]
+    \centering
+    \caption{Varijante protokola WiFi}
+    \begin{tabular}{| c | c | c | c |} 
+    \hline
+    \textbf{Standard} & \textbf{Ime} & \textbf{Frekvencije} & \textbf{Maskimalna propusnost}\\
+    \hline\hline
+    802.11a & Wi-Fi 2 & 5 GHz & 54 Mbps\\
+    \hline
+    802.11b & Wi-Fi 1 & 2.4 GHz & 11 Mbps\\ 
+    \hline
+    802.11g & Wi-Fi 3 & 2.4 GHz & 54 Mbps\\ 
+    \hline
+    802.11n & Wi-Fi 4 & 2.4 i 5 GHz & 600 Mbps\\ 
+    \hline
+    802.11ac & Wi-Fi 5 & 2.4 u 5 GHz & 1.3 Gbps \\ 
+    \hline
+    802.11ax & Wi-Fi 6 & 2.4 i 5 GHz & 10-12 Gbps\\ 
+    \hline
+    802.11ah & Wi-Fi HaLow & EU: 866 MHz & 347 Mbps\\ 
+    \hline
+    \end{tabular}
+    \label{tab:wifi}
+\end{table}
+
+IEEE 802.11i je dopuna na IEEE 802.11 \emph{Wired Equivalent Privacy} (WEP) sigurnosni mehanizam definiran u originalnom 802.11 standardu koji je zbog svoje slabih sigurnosnih svojstva neadekvatan standard. IEE 802.11i također nosi naziv i \emph{Wi-Fi Protected Access II} (WPA2). WPA2 je trenutno najkorišteniji za sigurnost komunikacija vezanih uz WiFi protokole. Prethodni WPA je također uz WEP prestao biti korišten u široj upotrebi zbog pronađenih sigurnosnih propusta vezanih uz slabe kriptografske algoritme korištene u šifriranju prometa. WPA3 je zadnji sigurnosni standard koji nudi poboljšanja u autentifikacijskom postupku i šifriranju prometa te će biti zadani standard za Wi-Fi 6 komunikaciju. U nastavku je prikazana tablica koja prikazuje razlike u svim sigurnosnim mehanizmima. Zbog raširenosti u nastavku će se promatrati sigurnosni mehanizmi WPA2.
+\begin{table}[H]
+    \centering
+    \caption{Usporedba sigurnosnih Wi-Fi standarda}
+    \begin{tabular}{| M || S | S | X | X |} 
+    \hline
+                              & \textbf{WEP} & \textbf{WPA} & \textbf{WPA2} & \textbf{WPA3}\\
+    \hline\hline
+    \textbf{Razvijen godine}         & 1997. & 2003. & 2004. & 2018.\\
+    \hline
+    \textbf{Razina sigurnosti}& Jako niska & Niska & Visoka & Jako visoka\\ 
+    \hline
+    \textbf{{Šifriranje}}     &  RC4 & TKIP s RC4 & AES-CCMP & AES-CCMP AES-GCMP\\ 
+    \hline
+    \textbf{Veličina ključa}  & 64 bita \hspace{0.2cm}128 bita & 128 bita &  128 bita & 128 bita \hspace{1cm}256 bita\\ 
+    \hline
+    \textbf{Autentifikacija}  & Otvoreni pristup Dijeljeni ključ & PSK AAAK & PSK \hspace{1cm}AAAK & AES-CCMP AES-GCMP\\ 
+    \hline
+    \textbf{Integritet}       & CRC-32 & 64 bitni MIC & AES-CCMP & SHA-2\\ 
+    \hline
+    \end{tabular}
+    \label{tab:wpa}
+\end{table}
+
+WPA2 uvodi koncept \emph{Robust Security Network} (RSN), koji se definira kao bežična sigurnosna mreža koja omogućuje kreiranje sigurnih bežičnih konekcija naziva \emph{Robust Security Network Associations} (RSNA). RSNA omogućava sigurnosne mehanizme napredne autentifikacije korisnika, upravljanje kriptografskim algoritmima, povjerljivost podataka, autentifikacija i integritet izvora podataka te zaštitu od napada ponavljanjem. RSNA koristi dvije autentifikacijske metode koje se koriste kako bi se odvijalo izvođenje kriptografskih ključeva za autentifikacija i integritet podataka. \emph{Pre-Shared Key} (PSK) se koristi u nekomercijalnim mrežama gdje svi korisnici koji pristupaju mreži koriste jedan ključ, tj. lozinku. \emph{Authentication, Authorization, and Accounting Key} (AAAK) koji se pristupnoj točki dostavlja putem \emph{Extensible Authentification Protocol} (EAP) koji omogućuje autentifikaciju korisnika putem identiteta gdje svaki korisnik ima svoje pristupne podatke i koristi se većinom u komercijalnim mrežama. 
+
+Tri različite komponente RSNA su: krajnji uređaji koji pristupaju mreži (STA) \engl{stations}, pristupna točka (AP) \engl{access point} i autentifikacijski poslužitelji (AS). U nastavku se promatraju pet faza za uspostavu i raskid veze, a na slici \ref{fig:psk} su prikazane faze korištenjem PSK autentifikacijske metode.
+\begin{enumerate}
+    \item\textbf{Otkrivanje:} STA identificira AP za mrežu s kojom želi supostaviti komunikaciju. STA locira AP primanjem jednog od AP-ovih periodičnih \emph{Beacon} okvira ili slanjem \emph{Probe} zahtjeva. Nakon što STA identificira AP, dolazi do izmjenjivanja okvira za pregovor oko komunikacijskih parametara. Na kraju prve faze su uspostavljeni kriptografski protokoli za povjerljivost i integritet podataka, autentifikacijska metoda i način distribucije ključeva.
+    \item\textbf{Autentifikacija:} U slučaju metode korištenjem AAAK u ovoj fazi se izvodi međusobna autentifikacija STA i AP-a. Autentifikacijski okviri prolaze kroz AP do AS-a kako bi se korištenjem EAP-a mogla odviti autentifikacija. AP blokira sve okvire STA koji nisu autentifikacijski dok se ne izvrši autentifikaijca STA.Kada se autentifikacija izvrši AAAK se sprema na STA i AP. Metoda korištenjem PSK nema ovu fazu zbog korištenja jednog ključa za pristup.
+    \item\textbf{Generiranje i distribucija ključeva:} Tijekom ove faze AP i STA izvode nekoliko operacija koje generiraju kriptografske algoritme za daljnju komunikaciju. To se izvodi kroz dvije vrste rukovanja: četverostruko rukovanje i rukovanje grupnim ključevima.
+    \item\textbf{Zaštićeni prijenos podataka:} STA i AP izmjenjuje podatke sigurnim putem korištenjem sigrunosnih politika i kriptografskih ključeva uspostavljenih tijekom prve tri faze. Jer se sigurni prijenos odvija samo između STA i AP-a, potrebno je zasebno zaštiti podatke tijekom ostatka prijenosa.
+    \item\textbf{Raskid konekcije:} STA i AP prekidaju svoju sigurnu vezu i brišu podatke o svojoj međusobnoj povezanosti\citep{NIST}.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/psk.png}
+    \caption{Faze uspostava i raskida veze korištenjem PSK metode\citep{NIST}}
+    \label{fig:psk}
+\end{figure}
 
 \subsubsection{Bluetooth Low Energy}
 \emph{Bluetooth Low Energy} (BLE) je bežični protokol male snage te je jedan od dva protokola pod Bluetooth nazivom. Drugi protokol je Bluetooth Classic koji se koristi za kontinuiranu komunikaciju velikog skupa podataka na maloj udaljenosti te kao takav je korišten u Internetu stvari, ali za potrebe stacionarnih uređaja sa stalnim izvorom napajanja koji kontinuirano šalju podatke. BLE koristi periodični prijenos manjih podatkovnih paketa te u trenucima kada ne sudjeluje u razmjeni podataka je u stanju mirovanja što uvelike dopinosi smanjenju potrošnje energije. Na taj način se omogućuje razvoj manjih mobilnih uređaja koji mogu biti pokretani duže vrijeme na maloj bateriji. 
@@ -465,15 +534,15 @@ Ova metoda nudi zaštitu od pasivnog prisluškivanja, ali ne i od \emph{man-in-t
 
 Metoda uparivanja numeričkom usporedbom je dostupna samo za Secure konekcije te također zahtijeva sudjelovanje korisnika. Nakon druge faze uparivanja uređaji koriste nasumične vrijednosti koje su prije razmjenili kako bi generirali šesteroznamenskastu vrijednost koju korisnik treba usporediti na oba uređaja. Ova metoda nudi zađtitu od \emph{man-in-the-middle} napada jer nijedan uređaj se ne može povezati na mrežu bez ručne verifikacije\citep{Kacherovska2019Aug}.
 
-\subsubsection{IEEE 802.15.4}
-IEEE 802.15.4 je standard koji specificira bežične tehnologije prijenosa podataka za uređaje i mreže ograničenih mogućnosti s fokusom na nisku potrošnju energije. Standard specificira fizički sloj i sloj za kontrolu pristupa sredstvu \engl{Medium Access Control}. 
+%\subsubsection{IEEE 802.15.4}
+%IEEE 802.15.4 je standard koji specificira bežične tehnologije prijenosa podataka za uređaje i mreže ograničenih mogućnosti s fokusom na nisku potrošnju energije. Standard specificira fizički sloj i sloj za kontrolu pristupa sredstvu \engl{Medium Access Control}. 
 
 \subsubsection{LoRaWAN}
 LoRaWAN \engl{Long Range Wide Area Network} je standard za bežičnu komunikaciju koji dovoljava komunikaciju uređaja Interneta stvari preko velikih udaljenosti s minimalnom energetskom potrošnjom. LoRa i LoRaWAN su pojmovi koji se koriste naizmjenično iako definiraju različite slojeve Internet stvari složaja. LoRa definira fizički sloj dok LoRaWAN definira protokol i arhitekturu sustava. LoRa definira različite radiofrekvencijske pojase koji pripadaju ISM pojasevima. U Europi LoRa koristi frekvenicije na pojasu oko 869MHz, dok u Sjevernoj Americi koristi 923MHz čime se javlja nekompatibilnost uređaja prozivedenih za ta dva tržišta. Domet komunikacije ovisi o monogo parametara poput naseljenosti područja u kojem se odvija komunikacija. Za urbana područja domet je oko 5km, predgrađa 10km, a u nenaseljenim područjima može dostići i do 80km.
 LoRaWAN arhitektura se sastoji od: krajnjih čvorova (uređaja), LoRa prilaza, mrežnog poslužitelja i krajnjih aplikacija. Prikaz topologije LoRaWAN arhitekture je na sljedećoj slici.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=13cm]{images/lorawan.png}
+    \includegraphics[width=11cm]{images/lorawan.png}
     \caption{Topologija LoRaWAN arhitekture\citep{LoraWANImg}}
     \label{fig:lorawan}
 \end{figure}
@@ -523,6 +592,7 @@ ABP je najednostavniji način za aktivaciju i pristup LoRa uređaja na mrežu. D
 \end{enumerate}
 
 OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo kojoj mreži u blizini i ne zahtijeva poseban dogov između dobavljača uređaja i davatelja mrežnih usluga. Postupak je različit za verziju 1.1 i ranije verzije, a ovdje ćemo gledati postupak aktivacije za verziju 1.1. Kako bi se sigurnim putem dobavili potrebni ključevi i adresa uređaja postupak koristi dva dodatna kriptografska ključa naziva AppKey i NwkKey koji uz DevEUI trebaju biti spremljeni na uređaju prije postupka aktivacije. To su kriptografski ključevi od 128 bita korišteni za AES kriptografski algoritam. Na pristupnom poslužitelju su spremljeni AppKey, NwkKey i DevEUI. Koraci u postupku aktivacije su:
+%Tijek OTAA aktivacijskog postupka je prikazan na slici x.x.
 \begin{enumerate}
     \item LoRa uređaj šalje Join-request zahtjev potpisan s NwkKey. Zahtjev za pristup mreži sadrži JoinEUI, DevEUI i DevNonce. DevNonce je dvobitni brojač koji počinje s vrijednošću 0 i inkrementira se sa svakim Join-request zahtjevom, a koristi se za sprječavanje napada ponavljanjem. Ovaj zahtijev nije šifriran. Zahtjev LoRa prilazi prosljeđuju na mrežni poslužitelj.
     \item Mrežni poslužitelj koristi DNS kako bi doznao IP adresu pristupnog poslužitelja iz JoinEUI polja.
@@ -534,6 +604,14 @@ OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo koj
     \item Aplikacijski poslužitelj zahtjeva AppSKey izravno od pristupnog poslužitelja slanjem AppSKeyReq zahjeva koji sadrži DevEUI uređaja. AppSKey je šifriran koristeći zajedničku tajnu pristupnog i mrežnog poslužitelja. Pristupni poslužitelj šalje šifrirani AppSKey i DevEUI aplikacijskom poslužitelju u AppSKeyAns poruci. Aplikacijski poslužitelj dešifrira AppSKey i pomoću njega dešifrira poruku uređaja.
     \item Nakon aktivacije uređaj ima spremljen DevAddr, FNwkSIntKey, SNwkSIntKey, NwkSEncKey i AppSKey\citep{LoraWANAct}.
 \end{enumerate}
+
+%Add image and fix issue with citation being broken
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=13cm]{images/otaa.png}
+%    \caption{Tijek OTAA postupka\citep{LoRaWANAct}}
+%    \label{fig:otaa}
+%\end{figure}
 
 LoRaWAN mreže se u načinu pristupa i potrebne implementacije dijele u tri skupine: komercijalne gdje mrežu pružaju operateri i naplačuju pristup, javne u koje se može bilo tko uključiti i pružati pristup te privatne koje svatko zasebno može pokrenuti svoju vlastitu privatnu mrežu.
 
@@ -596,12 +674,10 @@ Na sljedećoj slici je prikazan postupak TCP i TLS rukovanja potreban kako bi se
 
 \subsubsection{CoAP}
 CoAP \engl{Constrained Application Protocol}\citep{COAP} je specijalizirani protokol za uređaje ograničenih resursa te kao protokol transportnog sloja koristi UDP na vratima 5683. Protokol je dizajniran za pouzdani prijenos podataka u okolinama male propusnosti i visoke razine zagušenja prometa upotrebom malih zaglavlja paketa i potrebi za maloj procesnoj snazi za obradu zahtjeva. CoAP kao i HTTP djeluje na temelju zahtjeva i dogovora između klijenta i poslužitelja, a koristi URI shemu za identificiranje resursa na mrežnoj lokaciji. Metode koje se koriste u zahtijevima su identične HTTP-u te se temelje na REST \engl{Representational State Transfer} arhitekturi. Metode zahtijeva su definirane kodnim brojem u zaglavlju poruke koje definira i kodni broj statusa odgovora. Kodni broj je veličine 8 bitova. Podržane metode su prikazane u tablici.
-\newcolumntype{L}{>{\centering\arraybackslash}m{4cm}}
-\newcolumntype{R}{>{\centering\arraybackslash}m{3cm}}
 \begin{table}[H]
     \centering
     \caption{Podržane metode CoAP zahtijeva}
-    \begin{tabular}{| L | L | R |} 
+    \begin{tabular}{| L | L | M |} 
     \hline
     \textbf{Metoda} & \textbf{Funkcionalnost} & \textbf{Svojstva}\\
     \hline\hline
@@ -658,11 +734,11 @@ Sva tri navedena protokola nemaju vlastite mehanizme koji bi omogučavali šifri
 HTTP je u svojoj primjeni puno fleksibilniji zbog mogućnosti prijenosa bilo koje vrste podataka koji uključuju hipertekstualne datoteke, slike, video i audio zapisa te kao takav je najzastupljeniji protokol aplikacijskog sloja na Internetu. Za razliku su MQTT i CoAP protokoli dizajnirani kao lagani protokoli za uređaje i mreže ograničenih resursa. Tako je glavna namjena tih protokola kod praćenja očitanja i jednostavnih događaja pretežito prisutnih u Internetu stvari.
 
 \chapter{Sustav za praćenje tjelesne temperature}
-
-\section{Arhitektura sustava}
+%Opisati općenito sustav, cilj, svrha, itd.
+\section{Korišteni razvojni alati i uređaji}
 a
 
-\section{Korišteni razvojni alati i uređaji}
+\section{Arhitektura sustava}
 a
 
 \section{Opis rada sustava}
