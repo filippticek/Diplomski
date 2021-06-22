@@ -129,7 +129,7 @@ Internet stvari je širok u svojem području primjena. U današnjem svijetu post
     \end{itemize}
     \item Okoliš
     \begin{itemize}
-        \item Praćanje vremena
+        \item Praćenje vremena
         \item Praćenje zagađenja zraka
         \item Praćenje zagađenja bukom
         \item Detekcija požara
@@ -469,9 +469,9 @@ IEEE 802.11i je dopuna na IEEE 802.11 \emph{Wired Equivalent Privacy} (WEP) sigu
     \hline
     \textbf{Razina sigurnosti}& Jako niska & Niska & Visoka & Jako visoka\\ 
     \hline
-    \textbf{{Šifriranje}}     &  RC4 & TKIP s RC4 & AES-CCMP & AES-CCMP AES-GCMP\\ 
+    \textbf{{Šifriranje}}     &  RC4 & TKIP & AES-CCMP & AES-CCMP AES-GCMP\\ 
     \hline
-    \textbf{Veličina ključa}  & 64 bita \hspace{0.2cm}128 bita & 128 bita &  128 bita & 128 bita \hspace{1cm}256 bita\\ 
+    \textbf{Veličina ključa}  & 64 bita \hspace{0.2cm}128 bita & 64 bita\hspace{0.2cm} 128 bita &  128 bita & 128 bita \hspace{1cm}256 bita\\ 
     \hline
     \textbf{Autentifikacija}  & Otvoreni pristup Dijeljeni ključ & PSK AAAK & PSK \hspace{1cm}AAAK & AES-CCMP AES-GCMP\\ 
     \hline
@@ -570,7 +570,7 @@ Mrežni poslužitelji upravljaju cijelom LoRaWAN mrežom. Zadaće poslužitelja 
 
 Pristupni poslužitelj obrađuju pristupne zahtjeve krajnjih uređaja. Poslužitelj obavlja funkcije spremanja root kriptografskih ključeva, generira ključeve sjednice i prijenosi ključeve sjednice mrežnim i aplikacijskim poslužiteljima. Pristupni poslužitelj je uveden u LoRaWAN mrežu od verzije 1.0.4 i 1.1.
 
-LoRaWAN 1.1 nudi nekoliko razina sigurnosti. Mrežni poslužitelj ne treba imati informaciju o sadržaju poruke koja se usmjeruje, a da nije relevantna za mrežu ili infrastrukturu. Zato postoje dva različita kriptografska 128 bitna ključa koji koriste AES alogritam za šifriranje i 2 ključa za provjeru integriteta poruka kod uređaja kako bi se postigla zaštita podataka na dvije razine. Ključevi korišteni nakon povezivanja uređaja na mrežu su sljedeći:
+LoRaWAN 1.1 nudi nekoliko razina sigurnosti. Mrežni poslužitelj ne treba imati informaciju o sadržaju poruke koja se usmjeruje, a da nije relevantna za mrežu ili infrastrukturu. Zato postoje dva različita kriptografska 128 bitna ključa koji koriste algoritam za šifriranje AES i 2 ključa za provjeru integriteta poruka kod uređaja kako bi se postigla zaštita podataka na dvije razine. Ključevi korišteni nakon povezivanja uređaja na mrežu su sljedeći:
 \begin{description}
     \item[SNwkSIntKey:]Ovo je ključ mrežne sjednice koji koristi uređaj za potvrdu integriteta svake primljene poruke putem \emph{Message Interity Code} (MIC) provjere i za izračun MIC-a za pola odlazne poruke.
     \item[FNwkSIntKey:]Ovo je ključ mrežne sjednice koji koristi uređaj za izračun MIC-a cijelog ili dijela odlazne poruke.
@@ -591,8 +591,13 @@ ABP je najednostavniji način za aktivaciju i pristup LoRa uređaja na mrežu. D
     \item Kod prvog korištenja uređaja, nema nikakvog koraka za aktivacijom i pristupa uređaja mreži jer uređaji već mogu komunicirati s mrežom jer imaju sve potrebne informacije.
 \end{enumerate}
 
-OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo kojoj mreži u blizini i ne zahtijeva poseban dogov između dobavljača uređaja i davatelja mrežnih usluga. Postupak je različit za verziju 1.1 i ranije verzije, a ovdje ćemo gledati postupak aktivacije za verziju 1.1. Kako bi se sigurnim putem dobavili potrebni ključevi i adresa uređaja postupak koristi dva dodatna kriptografska ključa naziva AppKey i NwkKey koji uz DevEUI trebaju biti spremljeni na uređaju prije postupka aktivacije. To su kriptografski ključevi od 128 bita korišteni za AES kriptografski algoritam. Na pristupnom poslužitelju su spremljeni AppKey, NwkKey i DevEUI. Koraci u postupku aktivacije su:
-%Tijek OTAA aktivacijskog postupka je prikazan na slici x.x.
+OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo kojoj mreži u blizini i ne zahtijeva poseban dogovor između dobavljača uređaja i davatelja mrežnih usluga. Postupak je različit za verziju 1.1 i ranije verzije, a ovdje će se gledati postupak aktivacije za verziju 1.1. Kako bi se sigurnim putem dobavili potrebni ključevi i adresa uređaja postupak koristi dva dodatna kriptografska ključa naziva AppKey i NwkKey koji uz DevEUI trebaju biti spremljeni na uređaju prije postupka aktivacije. To su kriptografski ključevi od 128 bita korišteni za AES kriptografski algoritam. Na pristupnom poslužitelju su spremljeni AppKey, NwkKey i DevEUI. Koraci u postupku aktivacije su prikazani na sljedećoj slici i opisani u nastavku.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8.8cm]{images/otaa.png}
+    \caption{Tijek LoRaWAN 1.1 OTAA postupka\citep{LoRaWAN}}
+    \label{fig:otaa}
+\end{figure}
 \begin{enumerate}
     \item LoRa uređaj šalje Join-request zahtjev potpisan s NwkKey. Zahtjev za pristup mreži sadrži JoinEUI, DevEUI i DevNonce. DevNonce je dvobitni brojač koji počinje s vrijednošću 0 i inkrementira se sa svakim Join-request zahtjevom, a koristi se za sprječavanje napada ponavljanjem. Ovaj zahtijev nije šifriran. Zahtjev LoRa prilazi prosljeđuju na mrežni poslužitelj.
     \item Mrežni poslužitelj koristi DNS kako bi doznao IP adresu pristupnog poslužitelja iz JoinEUI polja.
@@ -602,21 +607,15 @@ OTAA je za razliku od ABP postupka kompliciraniji, ali dopušta pristup bilo koj
     \item Mrežni poslužitelj prima odgovor od uređaja te šalje DevEUI i šifriran AppSKey zajedno s porukom aplikacijskom poslužitelju. 
     \item Aplikacijski poslužitelj prima šifriran AppSKey zajedno s porukom i dešifrira AppSKey koristeći tajni ključ izmjenjen između pristupnog i aplikacijskog poslužitelja. Tada koristi AppSKey za dešifriranje poruke. Ako šifrirani AppSKey nije primljen tada se dovija još jedan korak.
     \item Aplikacijski poslužitelj zahtjeva AppSKey izravno od pristupnog poslužitelja slanjem AppSKeyReq zahjeva koji sadrži DevEUI uređaja. AppSKey je šifriran koristeći zajedničku tajnu pristupnog i mrežnog poslužitelja. Pristupni poslužitelj šalje šifrirani AppSKey i DevEUI aplikacijskom poslužitelju u AppSKeyAns poruci. Aplikacijski poslužitelj dešifrira AppSKey i pomoću njega dešifrira poruku uređaja.
-    \item Nakon aktivacije uređaj ima spremljen DevAddr, FNwkSIntKey, SNwkSIntKey, NwkSEncKey i AppSKey\citep{LoraWANAct}.
+    \item Nakon aktivacije uređaj ima spremljen DevAddr, FNwkSIntKey, SNwkSIntKey, NwkSEncKey i AppSKey\citep{LoRaWAN}.
 \end{enumerate}
 
-%Add image and fix issue with citation being broken
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=13cm]{images/otaa.png}
-%    \caption{Tijek OTAA postupka\citep{LoRaWANAct}}
-%    \label{fig:otaa}
-%\end{figure}
-
-LoRaWAN mreže se u načinu pristupa i potrebne implementacije dijele u tri skupine: komercijalne gdje mrežu pružaju operateri i naplačuju pristup, javne u koje se može bilo tko uključiti i pružati pristup te privatne koje svatko zasebno može pokrenuti svoju vlastitu privatnu mrežu.
+LoRaWAN mreže se u načinu pristupa i potrebne implementacije dijele u tri skupine: komercijalne, gdje mrežu pružaju operateri i naplaćuju pristup, javne, u koje se može bilo tko uključiti i pružati pristup te privatne u kojima svatko može pokrenuti svoju vlastitu privatnu mrežu.
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
-a
+Protokoli navedeni u analizi koriste bežičnu komunikaciju između krajnjih uređaja i bazne stanice ili prilaza. Važno je zaštititi podatke koji se prenose u komunikaciji kako bi se spriječio napad pasivnim prisluškivanjem. Pasivno prisluškivanje se zbog bežične prirode komunikacije može lako izvesti nad nešifriranim podacima. LoRaWAN i BLE koriste algoritam AES s 128 bitnim ključem koji nudi visoku razinu zaštite. Wi-Fi nudi nekoliko različitih kriptografskih alogritama ovisno o korištenom sigurnosnom standardu. WEP koristi algoritam RC4 s 64 ili 128 bitnim kriptografskim ključem, WPA koristi algoritam TKIP s 64 ili 128 bitnim kriptografskim ključem, WPA2 koristi algoritam AES s 128 bitnim ključem, dok WPA3 koristi AES s 128 ili 256 bitnim ključem ovisno o načinu rada AES algoritma. \emph{Man-in-the-middle} napadi su također prisutni u bežičnoj komunikaciji u kojoj se napadač može naći kao posrednik u komunikaciji. Kako bi se spriječila ta vrsta potrebna je sigurna implementacija postupka pristupa mreži. BLE nudi metode poput \emph{Passkey}, \emph{Out of Band} i uparivanje numeričkom usporedbom koji spriječavaju tu vrstu napada. LoRaWAN 1.1 donosi unaprijeđenja nad prijašnjim verzijama korištenjem ABP i OTAA metoda. Wi-Fi sigurnosni standardi WEP, WPA i WPA2 imaju otkrivene sigurnosne propuste koji omogućuju tu vrstu napada, dok WPA3 donosi sigurnosne mehanizme koji to spriječavaju.  
+
+Wi-Fi je najpristupačniji protokol za razvoj Internet stvari rješenja zbog svoje raširenosti pristupnih točaka koje se koriste u različitim prostorima poput domova, ureda i javnim prostorima. Domet komunikacije ovisi o varijanti protokola, ali većinom se kategoriziraju kao protokol srednje udaljenosti uz Wi-Fi HaLow koji dozvoljava veće udaljenosti do 1km. BLE je drugi najpristupačniji protokol za razvoj također zbog svoje raširenosti u mobilnim telefonima i osobnim računalima. Primjena protokola je zbog svog kratkog dometa najprisutnija u rješenjima koje se nalaze na ljudskom tijelu poput medicinskih i \emph{fitness} uređaja koji se lako povezuju s mobilnim telefonima. LoRaWAN je protokol najvećeg dometa te se najviše koristi u senzorskim i aktuatorskim primjenama poput senzora požara i brojila. Uređaji većinom dolaze s podrškom za Wi-Fi i BLE komunikacijske module dok LoRaWAN zahtijeva zaseban modul što uz neraširenost protokola često nije pristupačno za razvoj.
 
 \section{Mrežni sloj}
 Mrežni sloj u složaju Interneta stvari omogućava prijenos informacija od prilaza do servisa koji se nalaze u vanjskoj mreži. Glavni način za komunikaciju između mreža je Internet protokol(IP). 
@@ -650,7 +649,9 @@ Aplikacijski sloj je zadnji sloj složaja Interneta stvari preko kojeg se izvodi
 
 \subsection{Analiza protokola}
 \subsubsection{HTTP}
-HTTP \engl{Hypertext Transfer Protocol} je protokol na aplikacijskom sloju za distribuirane, kolaborativne, hipermedijske sustave te koristi TCP kao bazu za komunikaciju između poslužitelja i klijenta. HTTP je u svom začetku bio osmišljen kao protokol za razmjenu hiperteksta, dok je danas zaslužan za razmjenu raznih hipermedijskih sadržaja, tj. teksta, slike, zvuka i videa te kao takav ima najveći udio prometa na Internetu među aplikacijskim protokolima. HTTP koristi URI \engl{Universal Resource Identifier} shemu za identificiranje resursa na mrežnoj lokaciji te koristi vrata 80 TCP-a. HTTP djeluje na temelju zahtjeva i odgovora gdje klijent zahtijeva resurs koristeći URI i definirane HTTP metode te na temelju zahtjeva dobiva odgovor od poslužitelja koji sadrži status odgovora, neobavezna polja zaglavlja te zahtjevani resurs u tijelu poruke ukoliko status odgovora poprima format 2XX. Zahtijevi osim tijela poruke također mogu sadržavati neobavezna polja zaglavlja koja daju više informacija vezana uz zahtijev poput zaglavlja koja imaju sigurnosne mehanizme: \emph{Content-MD5} polje koje služi za provjeru integriteta poruke korištenjem MD5 algoritma za izračunavanje kontrolne sume, \emph{Authorization} polje koje omogućuje autorizaciju korisnika na poslužitelju korištenjem korisničkog imena i lozinke kodirane \emph{Base64} kodnom stranicom ili neke druge vrste autorizacije. HTTP ima nekoliko verzija protokola od kojih su trenutno najzastupljenije HTTP/1.1 i HTTP/2 koje u suštini ne nude prevelike razlike osim veće brzine verzije dva zbog boljeg upravljanja zahtijevima, kompresijom zaglavlja i bolje upotrebe TCP konekcija. Trenutno je u razvoju treća verzija protokola koja kao protokol transportnog sloja koristi UDP i kao zadano donosi šifriranje podataka.
+HTTP \engl{Hypertext Transfer Protocol} je protokol na aplikacijskom sloju za distribuirane, kolaborativne, hipermedijske sustave te koristi TCP kao bazu za komunikaciju između poslužitelja i klijenta. HTTP je u svom začetku bio osmišljen kao protokol za razmjenu hiperteksta, dok je danas zaslužan za razmjenu raznih hipermedijskih sadržaja, tj. teksta, slike, zvuka i videa te kao takav ima najveći udio prometa na Internetu među aplikacijskim protokolima. HTTP koristi URI \engl{Universal Resource Identifier} shemu za identificiranje resursa na mrežnoj lokaciji te koristi vrata 80 TCP-a. HTTP djeluje na temelju zahtjeva i odgovora gdje klijent zahtijeva resurs koristeći URI i definirane HTTP metode te na temelju zahtjeva dobiva odgovor od poslužitelja koji sadrži status odgovora, neobavezna polja zaglavlja te zahtjevani resurs u tijelu poruke ukoliko status odgovora poprima format 2XX. 
+
+Zahtjevi osim tijela poruke također mogu sadržavati neobavezna polja zaglavlja koja daju više informacija vezana uz zahtijev poput zaglavlja koja imaju sigurnosne mehanizme: \emph{Content-MD5} polje koje služi za provjeru integriteta poruke korištenjem MD5 algoritma za izračunavanje kontrolne sume, \emph{Authorization} polje koje omogućuje autorizaciju korisnika na poslužitelju korištenjem korisničkog imena i lozinke kodirane \emph{Base64} kodnom stranicom ili neke druge vrste autorizacije. HTTP ima nekoliko verzija protokola od kojih su trenutno najzastupljenije HTTP/1.1 i HTTP/2 koje u suštini ne nude prevelike razlike osim veće brzine verzije dva zbog boljeg upravljanja zahtijevima, kompresijom zaglavlja i bolje upotrebe TCP konekcija. Trenutno je u razvoju treća verzija protokola koja kao protokol transportnog sloja koristi UDP i kao zadano donosi šifriranje podataka.
 
 HTTP/S \engl{Hypertext Transfer Protocol Secure} je nadogradnja HTTP-a uz korištenje kriptografskog protokola TLS \engl{Transport Layer Security} za šifriranje i autentifikaciju. HTTPS kao i HTTP koristi URI shemu za identificiranje resursa na mrežnoj lokaciji, a umjesto vrata 80 koristi vrata 443 TCP-a. TLS podržava razne kriptografske algoritme za šifriranje te digitalne certifikate za autentifikaciju. Verzija TLS-a koja se preporuča za korištenje je TLS 1.3 zbog pronađenih sigurnosnih propusta u prijašnjim verzijama. Postupak kojim se omogućava šifriranje i autentifikacija TLS-om se naziva rukovanje i dolazi nakon uspostava TCP konekcije te se izvodi u sljedećim koracima\cite{TLS}:
 \begin{enumerate}
@@ -667,7 +668,7 @@ HTTP/S \engl{Hypertext Transfer Protocol Secure} je nadogradnja HTTP-a uz koriš
 Na sljedećoj slici je prikazan postupak TCP i TLS rukovanja potreban kako bi se uspostavila HTTP/S sjednica.
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=14cm]{images/tls.png}
+    \includegraphics[width=14.5cm]{images/tls.png}
     \caption{Prikaz TCP i TLS rukovanja\citep{TLS}}
     \label{fig:tls}
 \end{figure}
@@ -708,7 +709,9 @@ Kao što se HTTP osigurava upotrebom TLS-a preko TCP-a, tako CoAP koristi DTLS \
 \subsubsection{MQTT}
 MQTT \engl{Message Queuing Telemetry Transport} je lagani protokol temeljen na porukama, koristi TCP kao protokol transportnog sloja na vratima 1883 te se bazira na topologiji PUSH/SUBSCRIBE. Arhitektura MQTT protokola sadrži dvije vrste sudionika: klijente i posrednike \engl{broker}.Posrednik je poslužitelj s kojim klijenti komuniciraju putem poruka te posrednik prosljeđuje te poruke na ostale klijente. Na taj način klijenti ne komuniciraju s ostalim klijentima već putem posrednika. Svaki klijent može biti izdavač \engl{publisher}, pretplatnik \engl{subscriber} ili oboje. 
 
-MQTT je protokol temeljen na događajima te na taj način nema periodičnog ili stalnog prijenosa podataka čime se smanjuje količina prijenosa. Izdavač šalje poruke jedino kada ima informacije za slanje, a posrednik prosljeđuje poruke pretplatnicima kada primi nove informacije. Još jedan način smanjenja količine prijenosa podataka je korištenjem strogo definiranom, malom konstrukcijom poruka. Svaka poruka sadrži zaglavlje od samo dva bajta, ali može sadržavati i dodatno neobavezno zaglavlje, dok je sadržaj poruke ograničen na 256MB. Tri različite razine kvalitete usluge su dostupne kako bi se moglo odabrati između smanjenja količine i osiguravanja pozudanosti prijenosa podataka. Nulta razina definira slanje poruka pretplatnicima bez potvrde je li poruka primljena, kod prve razine posrednik čeka potvrdu poruke te ako dođe do isteka vremena poruka se ponovno šalje te na taj način pretplatnik može poruku primiti više puta. Druga razina koristi četverostruko rukovanje između klijenta i posrednika kako bi se osiguralo da je poruka primljena i to točno jedan put. Za prvu i drugu razinu poruke se spremaju za klijente koji nisu trenutno dostupni te se ponovno šalju kada klijent postane ponovno dostupan. Na sljedećoj slici je prikazana topologija sudionika MQTT protokola.
+MQTT je protokol temeljen na događajima te na taj način nema periodičnog ili stalnog prijenosa podataka čime se smanjuje količina prijenosa. Izdavač šalje poruke jedino kada ima informacije za slanje, a posrednik prosljeđuje poruke pretplatnicima kada primi nove informacije. Još jedan način smanjenja količine prijenosa podataka je korištenjem strogo definiranom, malom konstrukcijom poruka. Svaka poruka sadrži zaglavlje od samo dva bajta, ali može sadržavati i dodatno neobavezno zaglavlje, dok je sadržaj poruke ograničen na 256MB. 
+
+Tri različite razine kvalitete usluge su dostupne kako bi se moglo odabrati između smanjenja količine i osiguravanja pozudanosti prijenosa podataka. Nulta razina definira slanje poruka pretplatnicima bez potvrde je li poruka primljena, kod prve razine posrednik čeka potvrdu poruke te ako dođe do isteka vremena poruka se ponovno šalje te na taj način pretplatnik može poruku primiti više puta. Druga razina koristi četverostruko rukovanje između klijenta i posrednika kako bi se osiguralo da je poruka primljena i to točno jedan put. Za prvu i drugu razinu poruke se spremaju za klijente koji nisu trenutno dostupni te se ponovno šalju kada klijent postane ponovno dostupan. Na sljedećoj slici je prikazana topologija sudionika MQTT protokola.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=11cm]{images/mqtt.png}
