@@ -42,7 +42,7 @@ Trend područja Interneta stvari je u brzom rastu te poprima sve veću primjenu 
 
 Ovaj rad primarno obrađuje sigurnosne mehanizme u Intenetu stvari uz glavni naglasak na informacijsku sigurnost, analizu i usporedbu sigurnosnih mehanizama protokola te implementaciju i sigurnosnu analizu sustava za praćenje tjelesne temperature. 
 
-U sljedećem poglavlju će se definirati pojam, referentni model, izazovi, područja primjene i trendovi u Internetu stvari. Treće poglavlje obrađuje zahtjeve vazane uz sigurnost i privatnost te sigurnosne propuste u Internetu stvari. U četvrtom poglavlju se kroz protokolni složaj Interneta stvari analiziraju i uspoređaju protokoli svakog sloja uz naglasak na sigurnosnim mehanizmima protokola. Peto poglavlje opisuje implementaciju sustava za prećenje tjelesne temperature, arhitekturu sustava, korištene razvojne alate i uređaje, opisuje rad sustava i analizu sigurnosti sustava. Konačno u zaključku...dopisati nakon napisanog zaključka.
+U sljedećem poglavlju će se definirati pojam, referentni model, izazovi, područja primjene i trendovi u Internetu stvari. Treće poglavlje obrađuje zahtjeve vazane uz sigurnost i privatnost te sigurnosne propuste u Internetu stvari. U četvrtom poglavlju se kroz protokolni složaj Interneta stvari analiziraju i uspoređaju protokoli svakog sloja uz naglasak na sigurnosnim mehanizmima protokola. Peto poglavlje opisuje implementaciju sustava za prećenje tjelesne temperature, arhitekturu sustava, korištene razvojne alate i uređaje, opisuje rad sustava i analizu sigurnosti sustava. Konačno u zaključku se utvrđuju implementacijski i sigurnosni izazovi oko razvoja sustava Internet stvari.
 
 \chapter{Internet stvari}
 
@@ -108,7 +108,7 @@ Sigurnost informacija i samih sustava je važan aspekt Interneta stvari u kojem 
 Privatnost je uz sigurnost izazov s kojim se susreću mnogi sustavi Interneta stvari. Pametni uređaji koji se nalaze u našoj blizini imaju mogućnosti pratiti i bilježiti podatke o nama i našoj okolini. Kako korisnici priključuju sve više i više uređaja to je količina prikupljenih podataka veća, čime i povreda privatnosti može imati negativne posljedice na korisnika. Povrede te privatnosti mogu dolaziti u različtim oblicima. Od osobnih informacija koje mogu detaljno identificirati korisnika daju mogućnost napada u obliku krađe identiteta, medicinskih podataka ili pristupnih lozinki različitim servisima do kompromitacije sigurnosnih kamera što dozvoljava napadačima izravno pračenje korisnika. Privatnost podataka koji nisu isključivo vezani uz krajnje korisnike su i podaci pravnih osoba gdje može doći do narušavanja poslovnih tajni, autentifikacijskih i autorizacijskih podataka za razne servise i sigurnosne sustave. Kako pristupiti zaštiti privatnosti je usko povezano sa sigurnošću sustava te je obrađeno u trećem poglavlju.
 
 \subsection{Integracija}
-Nove tehnologije donose i nove integracijske probleme sa sobom. U slučaju Interneta stvari ovaj izazov je veći zbog heterogenosti svih dijelova koji čine sustave. U slučaju heterogenosti sloja podatkovne poveznice i količine različitih protokola koji se koriste postoji problem uvođenja novih prijamnika i prilaza za te uređaje. Radi li se o niskofrekventnim riješenjima poput NFC-a ili protokolima poput ZigBee postoji potreba korištenja posebnih čitača ili prijamnika dok se taj problem ne pojavljuje kod WiFi protokola čija pristupna točka već postoji u većini domova. Nakon toga dolazimo do komunikacijske integracije između uređaja i poslužitelja, tj. programskih platformi. Na koji način će se odvijati prijenos podatka, kako će ti podaci biti organizirani te semantičko značenje tih istih podataka. Početkom razvoja riješenja Interneta stvari prvobitno su svi sustavi imali vlastite pristupne aplikacije. S pojavom želje za automatizacijom i međusobnom komunikacijom između uređaja različitih proizvođača počele su se razvijati platforme koje omogućuju interoperabilnost među sustavima te mogućnost upravljanja i praćenja uređaja putem jedne pristupne aplikacije. Kroz razvoj tih platformi proizvođači su počeli integrirati nove i postojeće uređaje da budu kompatibilni s njima.
+Nove tehnologije donose i nove integracijske probleme sa sobom. U slučaju Interneta stvari ovaj izazov je veći zbog heterogenosti svih dijelova koji čine sustave. U slučaju heterogenosti sloja podatkovne poveznice i količine različitih protokola koji se koriste postoji problem uvođenja novih prijamnika i prilaza za te uređaje. Radi li se o niskofrekventnim riješenjima poput NFC-a ili protokolima poput ZigBee postoji potreba korištenja posebnih čitača ili prijamnika dok se taj problem ne pojavljuje kod Wi-Fi protokola čija pristupna točka već postoji u većini domova. Nakon toga dolazimo do komunikacijske integracije između uređaja i poslužitelja, tj. programskih platformi. Na koji način će se odvijati prijenos podatka, kako će ti podaci biti organizirani te semantičko značenje tih istih podataka. Početkom razvoja riješenja Interneta stvari prvobitno su svi sustavi imali vlastite pristupne aplikacije. S pojavom želje za automatizacijom i međusobnom komunikacijom između uređaja različitih proizvođača počele su se razvijati platforme koje omogućuju interoperabilnost među sustavima te mogućnost upravljanja i praćenja uređaja putem jedne pristupne aplikacije. Kroz razvoj tih platformi proizvođači su počeli integrirati nove i postojeće uređaje da budu kompatibilni s njima.
 
 \section{Područja primjene}
 Internet stvari je širok u svojem području primjena. U današnjem svijetu postaje sve prisutnije u svakom aspektu života ljudi i taj trend će se nastaviti. Od naših domova do industrijskih postrojenja Internetu stvari omogućava pojednostavljenje naših života i poslovnih procesa. U nastavku su navedeni neke od glavnih područja primjene Interneta stvari i riješenja koja se koriste u tim područjima:
@@ -175,7 +175,7 @@ Ako promatramo porast broja umreženih Internet stvari uređaj možemo zaključi
 \begin{figure}[H]
     \centering
     \includegraphics[width=12cm]{images/iot-economic-impact.png}
-    \caption{Potencijalni ekonomski utjecaj kroz različita područja primjene za 2025. godinu. u bilijunima američkih dolara\citep{Patel2018Jan}}
+    \caption{Potencijalni ekonomski utjecaj Interneta stvari kroz različita područja primjene za 2025. godinu. izražen u bilijunima američkih dolara\citep{Patel2018Jan}}
     \label{fig:market}
 \end{figure}
 
@@ -365,9 +365,9 @@ Sloj podatkovne poveznice čine protokoli koji u osnovi opisuju način komunikac
 
 \subsection{Analiza pristupnih uređaja}
 \subsubsection{Raspberry Pi 4 Model B}
-Raspberry Pi je svojom pojavom na tržištu ponudio malo integrirano računalo za nisku cijenu čime je razvoj Interneta stvari postao pristupačniji za širu zajednicu. Zadnja verzija Pi računala je četvrta s time da sve tri prijašnje verzije su još uvijek u proizvodnji. Razlika između verzija je u procesorskoj snazi, radnoj memoriji, prisutnosti Ethernet i WiFi modula te broju USB i HDMI priključaka. Na Raspberry Pi-u se izvršava GNU/Linux operativni sustav čime se uvelike olakšava razvoj aplikacija i dobiva podrška za već postojeća programska rješenja. Na računalu se nalaze 40 priključnih pinova\engl{GPIO pins} koji omogućuju spajanje različitih senzorskih pločica, komunikacijskih modula, napajanja i zaslona čime se postiže visoka modularnost. Raspberry Pi je namjenjen kao stacionaran uređaj zbog njegove relativno visoke potrošnje energije s obzirom na integrirana računala s mikrokontrolerom što zahtjeva konstantan izvor napajanja putem strujnog adaptera. Neke od namjena su kao prilaz za ostale pametne uređaje zbog svoje procesorske snage, kao kontrolni centar sustav za pametan dom korištenjem platformi poput Home Assistanta, a spajanjem modula kamere Raspberry postaje nadzorna kamera. 
+Raspberry Pi je svojom pojavom na tržištu ponudio malo integrirano računalo za nisku cijenu čime je razvoj Interneta stvari postao pristupačniji za širu zajednicu. Zadnja verzija Pi računala je četvrta s time da sve tri prijašnje verzije su još uvijek u proizvodnji. Razlika između verzija je u procesorskoj snazi, radnoj memoriji, prisutnosti Ethernet i Wi-Fi modula te broju USB i HDMI priključaka. Na Raspberry Pi-u se izvršava GNU/Linux operativni sustav čime se uvelike olakšava razvoj aplikacija i dobiva podrška za već postojeća programska rješenja. Na računalu se nalaze 40 priključnih pinova\engl{GPIO pins} koji omogućuju spajanje različitih senzorskih pločica, komunikacijskih modula, napajanja i zaslona čime se postiže visoka modularnost. Raspberry Pi je namjenjen kao stacionaran uređaj zbog njegove relativno visoke potrošnje energije s obzirom na integrirana računala s mikrokontrolerom što zahtjeva konstantan izvor napajanja putem strujnog adaptera. Neke od namjena su kao prilaz za ostale pametne uređaje zbog svoje procesorske snage, kao kontrolni centar sustav za pametan dom korištenjem platformi poput Home Assistanta, a spajanjem modula kamere Raspberry postaje nadzorna kamera. 
 
-Raspberry Pi 4 Model B\citep{RPi4} je računalo koje poprima karakteristike stolnog računala. Tako sadrži Broadcom BCM2711, četverojezgreni Cortex-A72 (ARM v8) 64-bit SoC \engl{System on a chip}, 2, 4 ili 8 gigabajta radne memorije, gigabitni Ethernet priključak, WiFi modul te 2 micro-HDMI priključka koji podržavaju do 4K 60Hz monitore. Te specifikacije dozvoljavaju korištenje RPi4 kao malo stolno računalo, a ne samo kao ugradbeno računalo s nekoliko senzora. Podrška za programske jezike koji se koriste za razvoj nije ograničen s obzirom na to da uređaj može izvršavati GNU/Linux operativni sustav. Na sljedećoj slici je prikazan Raspberry Pi 4.
+Raspberry Pi 4 Model B\citep{RPi4} je računalo koje poprima karakteristike stolnog računala. Tako sadrži Broadcom BCM2711, četverojezgreni Cortex-A72 (ARM v8) 64-bit SoC \engl{System on a chip}, 2, 4 ili 8 gigabajta radne memorije, gigabitni Ethernet priključak, Wi-Fi modul te 2 micro-HDMI priključka koji podržavaju do 4K 60Hz monitore. Te specifikacije dozvoljavaju korištenje RPi4 kao malo stolno računalo, a ne samo kao ugradbeno računalo s nekoliko senzora. Podrška za programske jezike koji se koriste za razvoj nije ograničen s obzirom na to da uređaj može izvršavati GNU/Linux operativni sustav. Na sljedećoj slici je prikazan Raspberry Pi 4.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=8.5cm]{images/rpi4.jpg}
@@ -403,7 +403,7 @@ Waspmote\citep{Waspmote} je bežična senzorska platforma otvorenog koda posebno
 \end{figure}
 
 \subsubsection{ESP32}
-Ravijen od strane Espressif Systema, ESP32\citep{ESP32} je malo integrirano računalo s mikrokontorolerom niske cijene. ESP32 dolazi s integriranim komunikacijskim modulima za WiFi 802.11 b/g/n i Bluetooth s podrškom za BLE(Bluetooth Low Energy). Na pločici se nalazi dvojezgreni Tensilica Xtensa LX6 mikroprocesor s radnom frekvencijom do 240MHz, SRAM od 512KB, 4MB programabilne memorije, jedan micro USB priključak te 34 priključnih pinova. Napajanje se provodi putem USB priključka ili putem vanjske baterije spojene na odgovarajuče pinove. ESP32 je kod primjene najviše zastupljen kod mobilnih primjena zbog svoje niske potrošnje energije i malih dimenzija. Podrška za programske jezike koji se koriste za razvoj uređaja je ograničen na  MicroPython, CircuitPython, Lua, C/C++ te Arduino programski jezik. Prikaz ESP32 računala proizvedenog od strane Joy-IT-a je prikazan na sljedećoj slici.
+Ravijen od strane Espressif Systema, ESP32\citep{ESP32} je malo integrirano računalo s mikrokontorolerom niske cijene. ESP32 dolazi s integriranim komunikacijskim modulima za Wi-Fi 802.11 b/g/n i Bluetooth s podrškom za BLE(Bluetooth Low Energy). Na pločici se nalazi dvojezgreni Tensilica Xtensa LX6 mikroprocesor s radnom frekvencijom do 240MHz, SRAM od 512KB, 4MB programabilne memorije, jedan micro USB priključak te 34 priključnih pinova. Napajanje se provodi putem USB priključka ili putem vanjske baterije spojene na odgovarajuče pinove. ESP32 je kod primjene najviše zastupljen kod mobilnih primjena zbog svoje niske potrošnje energije i malih dimenzija. Podrška za programske jezike koji se koriste za razvoj uređaja je ograničen na  MicroPython, CircuitPython, Lua, C/C++ te Arduino programski jezik. Prikaz ESP32 računala proizvedenog od strane Joy-IT-a je prikazan na sljedećoj slici.
 \begin{figure}[H]
     \centering
     \includegraphics[width=4.8cm]{images/esp32.png}
@@ -431,10 +431,10 @@ Primjena svih navedenih uređaja ovisi o njihovim izvorima napajanja, veličini,
 
 \subsection{Analiza protokola}
 \subsubsection{IEEE 802.11 Wi-Fi}
-IEEE 802.11 Wi-Fi je porodica bežičnih komunikacijskih protokola temeljenih na radiofrekvencijskom prijenosu. Varijante protokola WiFi su jedani od najbolje zastupljenih komunikacijskih protokola zbog svoje pojave na tržištu zajedno s uređajima kojima je cilj bio mobilna uporaba poput prijenosnih računala i mobilnih telefona. Kroz godine se počela pojavljivati potreba za bržim prijenosom podataka, manjom latencijom i mogućnošću povezivanja više uređaja na jednu baznu stanicu \engl{access point} što je dovelo i do razvoja različitih standarda koji svi čine jednu porodicu protokola. U tablici su prikazani različiti standardi te frekvencije koje koriste i maksimalna propusnost koja se može postići.
+IEEE 802.11 Wi-Fi je porodica bežičnih komunikacijskih protokola temeljenih na radiofrekvencijskom prijenosu. Varijante protokola Wi-Fi su jedani od najbolje zastupljenih komunikacijskih protokola zbog svoje pojave na tržištu zajedno s uređajima kojima je cilj bio mobilna uporaba poput prijenosnih računala i mobilnih telefona. Kroz godine se počela pojavljivati potreba za bržim prijenosom podataka, manjom latencijom i mogućnošću povezivanja više uređaja na jednu baznu stanicu \engl{access point} što je dovelo i do razvoja različitih standarda koji svi čine jednu porodicu protokola. U tablici su prikazani različiti standardi te frekvencije koje koriste i maksimalna propusnost koja se može postići.
 \begin{table}[H]
     \centering
-    \caption{Varijante protokola WiFi}
+    \caption{Varijante protokola Wi-Fi}
     \begin{tabular}{| c | c | c | c |} 
     \hline
     \textbf{Standard} & \textbf{Ime} & \textbf{Frekvencije} & \textbf{Maskimalna propusnost}\\
@@ -457,7 +457,7 @@ IEEE 802.11 Wi-Fi je porodica bežičnih komunikacijskih protokola temeljenih na
     \label{tab:wifi}
 \end{table}
 
-IEEE 802.11i je dopuna na IEEE 802.11 \emph{Wired Equivalent Privacy} (WEP) sigurnosni mehanizam definiran u originalnom 802.11 standardu koji je zbog svoje slabih sigurnosnih svojstva neadekvatan standard. IEE 802.11i također nosi naziv i \emph{Wi-Fi Protected Access II} (WPA2). WPA2 je trenutno najkorišteniji za sigurnost komunikacija vezanih uz WiFi protokole. Prethodni WPA je također uz WEP prestao biti korišten u široj upotrebi zbog pronađenih sigurnosnih propusta vezanih uz slabe kriptografske algoritme korištene u šifriranju prometa. WPA3 je zadnji sigurnosni standard koji nudi poboljšanja u autentifikacijskom postupku i šifriranju prometa te će biti zadani standard za Wi-Fi 6 komunikaciju. U nastavku je prikazana tablica koja prikazuje razlike u svim sigurnosnim mehanizmima. Zbog raširenosti u nastavku će se promatrati sigurnosni mehanizmi WPA2.
+IEEE 802.11i je dopuna na IEEE 802.11 \emph{Wired Equivalent Privacy} (WEP) sigurnosni mehanizam definiran u originalnom 802.11 standardu koji je zbog svoje slabih sigurnosnih svojstva neadekvatan standard. IEE 802.11i također nosi naziv i \emph{Wi-Fi Protected Access II} (WPA2). WPA2 je trenutno najkorišteniji za sigurnost komunikacija vezanih uz protokole Wi-Fi. Prethodni WPA je također uz WEP prestao biti korišten u široj upotrebi zbog pronađenih sigurnosnih propusta vezanih uz slabe kriptografske algoritme korištene u šifriranju prometa. WPA3 je zadnji sigurnosni standard koji nudi poboljšanja u autentifikacijskom postupku i šifriranju prometa te će biti zadani standard za Wi-Fi 6 komunikaciju. U nastavku je prikazana tablica koja prikazuje razlike u svim sigurnosnim mehanizmima. Zbog raširenosti u nastavku će se promatrati sigurnosni mehanizmi WPA2.
 \begin{table}[H]
     \centering
     \caption{Usporedba sigurnosnih Wi-Fi standarda}
@@ -556,7 +556,7 @@ Krajnji čvorovi mogu biti senzori ili aktuatori, često su napajani baterijama 
     \item[Fport:]Identificira vrata aplikacijskog procesa. Usporedivo sa TCP/UDP vratima za TCP/IP uređaje.
 \end{description}
 
-LoRa prilazi primaju LoRa poruke od krajnjih uređaja te samo prosljeđuju te podatke na mrežne poslužitelje. Prilazi su povezani na Internet putem drugih protokola poput WiFi-a, Etherneta ili mobilnih mreža.
+LoRa prilazi primaju LoRa poruke od krajnjih uređaja te samo prosljeđuju te podatke na mrežne poslužitelje. Prilazi su povezani na Internet putem drugih protokola poput Wi-Fi-a, Etherneta ili mobilnih mreža.
 
 Mrežni poslužitelji upravljaju cijelom LoRaWAN mrežom. Zadaće poslužitelja su:
 \begin{itemize}
@@ -622,7 +622,7 @@ Mrežni sloj u složaju Interneta stvari omogućava prijenos informacija od pril
 
 \subsection{Analiza protokola}
 \subsubsection{IP}
-IP definira adresu uređaja kako bi paketi koji se šalju mogli biti usmjereni na taj uređaj. IP se dijeli na IPv4 i IPv6 protokole. Ta podjela postoji zbog ograničenosti IPv4 na 32 bitne adrese koje dozvoljavaju oko 4.2 bilijuna ($2^{32}$) adresa od kojih su neke rezervirane za posebne potrebe. IPv4 je postao usko grlo na mrežnom sloju, posebice razvitkom Interneta stvari te sve većem broju umreženih mobilnih uređaja. IPv6 donosi 128 bitne adrese koje dozvoljavaju oko $3.4*10^{38}$ adresa. Obje verzije protokola sadrže i proširenje pod nazivom IPSec \engl{Internet Protocol Security} koji vrši autentifikaciju i šifriranje paketa kako bi se osigurala komunikacija između dva računala preko različitih mreža. Glavna namjena ovog protokola je za uspostavu virtualnih privatnih mreža(VPN) te kao takav je rijetko u uporabi u Internet stvari sustavima već se autentifikacija i šifriranje podataka vrši na aplikacijskom sloju i sloju podatkovne poveznice te ne će biti obrađen u sklopu ovog rada. 
+IP definira adresu uređaja kako bi paketi koji se šalju mogli biti usmjereni na taj uređaj. IP se dijeli na protokole IPv4 i IPv6. Ta podjela postoji zbog ograničenosti IPv4 na 32 bitne adrese koje dozvoljavaju oko 4.2 bilijuna ($2^{32}$) adresa od kojih su neke rezervirane za posebne potrebe. IPv4 je postao usko grlo na mrežnom sloju, posebice razvitkom Interneta stvari te sve većem broju umreženih mobilnih uređaja. IPv6 donosi 128 bitne adrese koje dozvoljavaju oko $3.4*10^{38}$ adresa. Obje verzije protokola sadrže i proširenje pod nazivom IPSec \engl{Internet Protocol Security} koji vrši autentifikaciju i šifriranje paketa kako bi se osigurala komunikacija između dva računala preko različitih mreža. Glavna namjena ovog protokola je za uspostavu virtualnih privatnih mreža(VPN) te kao takav je rijetko u uporabi u Internet stvari sustavima već se autentifikacija i šifriranje podataka vrši na aplikacijskom sloju i sloju podatkovne poveznice te ne će biti obrađen u sklopu ovog rada. 
 
 \subsection{Usporedba sigurnosnih mehanizama i primjena}
 IP ne donosi nikakve sigurnosne mehanizme osim kontrolne sume kod IPv4. Razlog nepostojanja dodatnih mehanizama je postojanje podrške za šifriranjem na slojevima podatkovne poveznice i aplikacijskog sloja te postojanje kontrolne sume na tim slojevima uključujući i transportni sloj. Iako IPv4 sadrži kontrolnu sumu, ta opcija u zaglavlju je izostala iz IPv6 kako bi se smanjila potrebno vrijeme za procesiranjem s obzirom da protokoli viših i nižih slojeva već sadrže tu mogućnost. Nepostojanje sigurnosnih mehanizama kod ovih protokola je najizraženije u takozvanim \emph{IP spoofing} napadima. Taj napad se izvodi promjenom izvorišne adrese kako bi se najčešće izveo DDOS \engl{Distrubuted denial-of-service} napad. Napadač mijenja izvorišnu adresu u IP zaglavlju te radi veliki broj zahtijeva na različite servise s odredišnom adresom žrtve koja tada dobiva odgovor od svih servisa na koje su poslani zahtijevi kako bi zagušio i blokirao valjan promet. Obrana od takve vrste napada se najčešće provodi na usmjerivačima analizom prometa kako bi se utvrdili nevažeči paketi. 
@@ -737,12 +737,54 @@ Sva tri navedena protokola nemaju vlastite mehanizme koji bi omogučavali šifri
 HTTP je u svojoj primjeni puno fleksibilniji zbog mogućnosti prijenosa bilo koje vrste podataka koji uključuju hipertekstualne datoteke, slike, video i audio zapisa te kao takav je najzastupljeniji protokol aplikacijskog sloja na Internetu. Za razliku su MQTT i CoAP protokoli dizajnirani kao lagani protokoli za uređaje i mreže ograničenih resursa. Tako je glavna namjena tih protokola kod praćenja očitanja i jednostavnih događaja pretežito prisutnih u Internetu stvari.
 
 \chapter{Sustav za praćenje tjelesne temperature}
-%Opisati općenito sustav, cilj, svrha, itd.
-\section{Korišteni razvojni alati i uređaji}
-a
+Kako bi se olakšalo praćenje kretanja tjelesne temeperature te smanjila potreba za ručnim mjerenjem korištenjem termometara, razvijen je sustav za praćenje tjelesne temperature. Cilj ovog sustava je omogućiti korištenje prijenosnog termometra koji se nalazi priljepljen uz tijelo korisnika kako bi se mogao pratiti trend tjelesne temperature u razmaku minutnog intervala. Pregled podataka i upravljanje uređajima se odvija na web aplikaciji kako bi se s udaljenog mjesta mogao imati nadzor nad temperaturom korisnika.
 
-\section{Arhitektura sustava}
-a
+\section{Korišteni razvojni alati i uređaji}
+\subsection{Golang}
+Golang\citep{Golang} je proceduralno i statičko pisani programski jezik sa sintaksom sličnom programskom jeziku C. Nudi bogati izbor standardnih biblioteka, dinamičko upravljanje memorijom i mogućnosti za visoku razinu konkurentnosti. Jezik je razvijen 2007. godine u Googleu te je 2009. objavljen kao jezik otvorenog koda, a zadnja verzija je 1.16.5 te je jedan od programskih jezika koji je u zadnjih nekoliko godina dosegao visoku razinu popularnosti. Golang se najaviše koristi kao HTTP poslužitelj i jedan je od jezika koji je popularizirao razvoj aplikacija temeljenih na mikroservisnoj arhitekturi.
+
+\subsection{Fiber}
+Fiber\citep{Fiber} je Golang razvojni okvir namijenjen za HTTP poslužitelje. Dizajniran je za jednostavan i brz razvoj HTTP poslužitelja s naglaskom na performansama i velikom broju konkurentnih korisnika. 
+
+\subsection{React}
+React\citep{React} je JavaScript biblioteka za razvoj korisničkih sučelja. Omogućuje jednostavan razvoj interaktivnih sučelja temeljenih na komponentama koje upravljaju vlastitim stanjima i na temelju promjena stanja reagiraju na promjene kako bi se ažurirali ili prikazali potrebni dijelovi sučelja.
+
+\subsection{PostgreSQL}
+PostgreSQL\citep{PostgreSQL} je objektno-relacijska baza podataka otvorenog koda. PostgreSQL je u razvoju više od 30 godina te ima reputaciju kao pouzdana, robusna baza podataka visokih performansi s velikim brojem značajki. 
+
+\subsection{Docker}
+Docker\citep{Docker} je platforma za kreiranje i pokretanje aplikacija na ponovljiv način korištenjem kontejnera. Kontejneri dozvoljavaju pakiranje aplikacija sa svim bibliotekama, ovisnostima i programskim kodom potrebnim da se aplikacija izvršava kao jedan paket, tj. slika. Kontejneri su lagani virtualni operativni sustavi koji umjesto korištenja cijelog operativnog sustava kao jedan paket iskorištavaju jezgru operativnog sustava domaćina te tako smanjuju veličinu slike potrebne za pokretanje.
+
+\subsection{ESP32}
+Joy-IT NodeMCU-ESP32\citep{ESP32Img} je varijanta ESP32 integriranog računala s mikrokontrolerom od prozivođača Joy-IT. ESP32 nudi dva komunikacijska modula za Wi-Fi 802.11 b/g/n i Bluetooth s podrškom za BLE. Priključni pinovi dozvoljavaju laku integraciju analognih senzora, a micro USB priključak omogućuje lako priključivanje vanjskih prijenosnih baterija za napajanje uređaja. ESP32 je energetski učinkovito računalo s podrškom za duboki san kako bi se uvelike smanjila potrošnja energije kada uređaj ne treba vršiti nikakvu funkciju.
+
+\newpage
+\section{Arhitektura i dizajn sustava}
+Sustav za praćenje tjelesne temperature se sastoji od 4 glavne komponente: 
+\begin{itemize}
+    \item baze podataka,
+    \item back-end aplikacije,
+    \item front-end aplikacije,
+    \item uređaja.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=14.5cm]{images/arh.png}
+    \caption{Arhitektura sustava}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{Baza podataka}
+Baza podataka podatke sprema u bazi PostgreSQL koja se izvršava u Docker kontejneru.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=14.5cm]{images/baza.png}
+    \caption{Baza podataka}
+    \label{fig:baza}
+\end{figure}
+\subsection{Back-end aplikacija}
+\subsection{Front-end aplikacija}
+\subsection{Uređaj}
 
 \section{Opis rada sustava}
 a
@@ -752,7 +794,11 @@ a
 
 
 \chapter{Zaključak}
-Zaključak.
+Područje Interneta stvari je sve više rašireno u polju informacijskih tehnologija te u svakodnevnici ljudi. Ta raširenost donosi mnoge implementacijske izazove koji su vezani uz razvoj i održavanje sustava Interneta stvari. Izazova koji su obrađeni u sklopu ovog rada su vezani uz sigurnost i privatnost sustava.
+
+
+
+
 
 \bibliographystyle{fer}
 \bibliography{literatura}
