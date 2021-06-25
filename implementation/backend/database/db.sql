@@ -21,14 +21,14 @@ CREATE TABLE readings (
 );
 
 CREATE TABLE users_devices (
-    id          INTEGER PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     user_id     INTEGER,
     device_id   INTEGER,
     active      BOOLEAN
 );
 
 ALTER TABLE readings
-ADD CONSTRAINT fk_user)device FOREIGN KEY (user_device_id) REFERENCES users_devices (id);
+ADD CONSTRAINT fk_user_device FOREIGN KEY (user_device_id) REFERENCES users_devices (id);
 ALTER TABLE users_devices
 ADD CONSTRAINT fk_devices FOREIGN KEY (device_id) REFERENCES devices (id);
 ALTER TABLE users_devices
