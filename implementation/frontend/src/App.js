@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import './App.css'
+import Nav from "./components/Nav";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
+import Device from "./components/Device";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-function App() {
+
+function App(){
+  
+  useEffect(() => {
+    fetchLogin();
+  }, []);
+
+  const [logedIn, setLogedIn] = useState(false);
+
+  const fetchLogin = async () => {
+    const logedIn = true;
+    setLogedIn(logedIn);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/register" component={Register}/>
+      </div>
+    </Router>  
   );
 }
 
