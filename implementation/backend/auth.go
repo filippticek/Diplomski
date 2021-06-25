@@ -102,9 +102,9 @@ func Middleware(c *fiber.Ctx) error {
 
 	var user User
 
-	DB.Table("").Where("id = ?", claims.Issuer).First(&user)
+	DB.Table("users").Where("id = ?", claims.Issuer).First(&user)
 
-	return c.JSON(user)
+	return c.JSON(fiber.Map{"message": "ok"})
 }
 
 func Logout(c *fiber.Ctx) error {

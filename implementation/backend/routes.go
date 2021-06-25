@@ -2,10 +2,6 @@ package main
 
 import "github.com/gofiber/fiber/v2"
 
-func handler(c *fiber.Ctx) error {
-	return c.SendString(c.Path())
-}
-
 func Routes(router fiber.Router) {
 	router.Get("/user", GetUsers)
 	router.Get("/user/:id", GetUser)
@@ -19,7 +15,8 @@ func Routes(router fiber.Router) {
 	router.Put("/device/:id", UpdateDevice)
 	router.Delete("/device/:id", DeleteDevice)
 
-	router.Get("/user_device", GetUserDevice)
+	router.Get("/user_device/:id", GetUserDevice)
+	router.Get("/device_user/:id", GetDeviceUser)
 	router.Post("/user_device", CreateUserDevice)
 	//router.Put("/user_device/:id", handler)
 	//router.Delete("/user_device/:id", handler)

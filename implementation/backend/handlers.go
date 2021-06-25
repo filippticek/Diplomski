@@ -9,9 +9,12 @@ import (
 
 func GetUsers(c *fiber.Ctx) error {
 	users := &GetUsersResponse{}
-	err := DB.Table("users").Scan(&users).Error
+	err := DB.Table("users").Scan(&users.Users).Error
 	if err != nil {
-		return err
+		return c.SendStatus(404)
+	}
+	if users == nil {
+		return c.SendStatus(404)
 	}
 	return c.JSON(&users)
 }
@@ -31,6 +34,7 @@ func CreateUser(c *fiber.Ctx) error {
 	if err := c.BodyParser(&user); err != nil {
 		return err
 	}
+	user.Role = "PATIENT"
 	err := DB.Table("users").Create(&user).Error
 	if err != nil {
 		return err
@@ -71,7 +75,7 @@ func DeleteUser(c *fiber.Ctx) error {
 
 func GetDevices(c *fiber.Ctx) error {
 	devices := &GetDevicesResponse{}
-	err := DB.Table("devices").Scan(&devices).Error
+	err := DB.Table("devices").Scan(&devices.Devices).Error
 	if err != nil {
 		return err
 	}
@@ -132,26 +136,23 @@ func DeleteDevice(c *fiber.Ctx) error {
 }
 
 func GetUserDevice(c *fiber.Ctx) error {
-	userDevice := &GetUserDeviceRequest{}
-	if err := c.BodyParser(&userDevice); err != nil {
+	id, _ := strconv.Atoi(c.Params("id"))
+	response := &GetUserDeviceResponse{}
+	err := DB.Table("users_devices").Where("user_id = ? AND active", id).Scan(&response).Error
+	if err != nil {
 		return err
 	}
+	return c.JSON(&response)
+}
+
+func GetDeviceUser(c *fiber.Ctx) error {
+	id, _ := strconv.Atoi(c.Params("id"))
 	response := &GetUserDeviceResponse{}
-	if userDevice.DeviceID != 0 {
-		err := DB.Table("users_devices").Where("device_id = ? AND active", userDevice.DeviceID).Scan(&response).Error
-		if err != nil {
-			return err
-		}
-		return c.JSON(&response)
+	err := DB.Table("users_devices").Where("device_id = ? AND active", id).Scan(&response).Error
+	if err != nil {
+		return err
 	}
-	if userDevice.UserID != 0 {
-		err := DB.Table("users_devices").Where("user_id = ? AND active", userDevice.DeviceID).Scan(&response).Error
-		if err != nil {
-			return err
-		}
-		return c.JSON(&response)
-	}
-	return c.SendStatus(404)
+	return c.JSON(&response)
 }
 
 func CreateUserDevice(c *fiber.Ctx) error {
@@ -162,7 +163,7 @@ func CreateUserDevice(c *fiber.Ctx) error {
 
 	err := DB.Table("users_devices").Where("device_id = ? AND active", userDevice.DeviceID).Update("active", false).Error
 	if err != nil {
-		return err
+		return c.SendStatus(500)
 	}
 	response := &CreateUserDeviceResponse{
 		UserID:   userDevice.UserID,
@@ -189,7 +190,7 @@ func GetReadings(c *fiber.Ctx) error {
 		if err != nil {
 			return err
 		}
-		err = DB.Table("readings").Where("id = ?", id).Scan(&response).Error
+		err = DB.Table("readings").Where("id = ?", id).Scan(&response.Readings).Error
 		if err != nil {
 			return err
 		}
@@ -201,7 +202,7 @@ func GetReadings(c *fiber.Ctx) error {
 		if err != nil {
 			return err
 		}
-		err = DB.Table("readings").Where("id = ?", id).Scan(&response).Error
+		err = DB.Table("readings").Where("id = ?", id).Scan(&response.Readings).Error
 		if err != nil {
 			return err
 		}

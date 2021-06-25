@@ -42,11 +42,8 @@ type GetUsersResponse struct {
 }
 
 type CreateUserRequest struct {
-	Id        uint   `json:"id,omitempty"`
 	FirstName string `json:"first_name,omitempty"`
 	LastName  string `json:"name,omitempty"`
-	Username  string `json:"email,omitempty" gorm:"unique"`
-	Password  string `json:"password,omitempty"`
 	Role      string `json:"role,omitempty"`
 }
 
@@ -77,7 +74,7 @@ type GetDeviceResponse struct {
 }
 
 type GetDevicesResponse struct {
-	Users []GetDeviceResponse `json:"users,omitempty"`
+	Devices []GetDeviceResponse `json:"devices,omitempty"`
 }
 
 type CreateDeviceRequest struct {
@@ -101,11 +98,6 @@ type UpdateDeviceResponse struct {
 
 type DeleteDeviceResponse struct {
 	Status string `json:"status,omitempty"`
-}
-
-type GetUserDeviceRequest struct {
-	UserID   uint `json:"user_id,omitempty"`
-	DeviceID uint `json:"device_id,omitempty"`
 }
 
 type GetUserDeviceResponse struct {

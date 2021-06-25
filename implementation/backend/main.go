@@ -17,13 +17,13 @@ func middleware(c *fiber.Ctx) error {
 }
 
 func main() {
-	dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Europe/Zagreb"
-	connection, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	dsn := "host=localhost user=temp password=secret dbname=system port=7654 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")
 	}
-	DB = connection
+	DB = db
 
 	app := fiber.New()
 
