@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: postgres:12
+    environment:
+        POSTGRES_USER: temp
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: system
+        PGDATA: /db
+    volumes:
+        - ./db/data:/db
+        - .db/logs:/pg_logs
+        - .db/init:/docker-entrypoint-initdb.d
+    ports:
+        - 127.0.0.1:7654:5432 
+    restart: always
